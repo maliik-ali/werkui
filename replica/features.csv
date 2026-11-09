@@ -1,0 +1,57 @@
+feature,area,priority,original,clone,notes
+Home page with hero and routes into the catalog,home,must,yes,yes,
+Animated hero background,home,should,yes,yes,original code-drawn; reduced-motion fallback
+Template grids per platform on home,home,must,yes,yes,Figma / Framer / Webflow
+New and trending tabs,home,could,yes,no,
+How it works steps,home,should,yes,yes,
+Testimonials,home,should,yes,no,only real quotes from Malik's clients; no real client quotes supplied yet
+FAQ accordion,home,must,yes,yes,
+Newsletter signup,home,should,yes,yes,
+Catalog page with card grid,catalog,must,yes,yes,
+Filter by platform,catalog,must,yes,yes,
+Filter by category,catalog,must,yes,yes,
+Filter free vs paid,catalog,must,yes,yes,
+Search templates by name,catalog,should,yes,yes,
+Sort (newest / price),catalog,could,no,yes,improvement over originals
+Load more or pagination,catalog,should,yes,no,not needed at 9 products
+Empty state with request-a-template link,catalog,should,yes,yes,
+Template card with price and platform badges,catalog,must,yes,yes,
+Template detail page,detail,must,yes,yes,
+Image gallery,detail,must,yes,partial,single cover until real screenshots are uploaded
+Summary table (platform pages type),detail,must,yes,yes,
+Pages or screens included list,detail,should,yes,yes,
+Features and built-for lists,detail,must,yes,yes,
+Live preview button,detail,must,yes,yes,
+Preview frame with buy bar and device toggle,detail,should,no,yes,improvement over originals
+Buy button to hosted checkout,payments,must,yes,yes,Stripe Checkout
+Free template instant access,payments,must,yes,yes,
+Automatic delivery of file link after payment,payments,must,yes,partial,via Stripe payment-link confirmation page; needs Malik's links
+Order success page,payments,must,yes,partial,Stripe's confirmation page in v1
+Receipt and access email,payments,should,yes,partial,sent by Stripe once payment links exist
+All-access plans,pricing,must,yes,yes,
+Yearly and lifetime toggle,pricing,should,yes,yes,
+Plan comparison,pricing,could,yes,yes,
+All-access upsell on detail page,pricing,should,yes,yes,
+Related templates,detail,should,yes,yes,
+License page,legal,must,yes,yes,
+Terms privacy refunds pages,legal,must,yes,yes,
+Sign in with email link or Google,account,must,yes,no,phase 2 (needs Stripe API keys to know who bought)
+Library of purchases,account,must,yes,no,phase 2
+Billing portal link,account,could,unknown,no,phase 2
+Hire experts page,services,must,yes,yes,two paths: Rayvens team and Malik Ali
+Service plans with prices,services,should,yes,no,prices to be set by Malik; quote-based until Malik sets prices
+Enquiry form,services,must,yes,yes,
+Book a call link,services,could,yes,no,no booking URL supplied
+Referral attribution from malikali.de and rayvens.com,growth,should,no,yes,WerkUI-specific
+Public JSON feed of products for partner sites,growth,should,no,yes,lets malikali.de and rayvens.com list the same resources
+Seller profile page,marketplace,should,no,yes,future seam; Malik and Rayvens as first sellers
+Product kinds beyond templates (course consultation book),marketplace,could,no,yes,schema ready; UI tabs
+Seller onboarding and payouts,marketplace,could,no,skip,later phase with Stripe Connect
+Blog,content,could,yes,no,later
+Template finder quiz,growth,could,yes,skip,later
+Affiliate program,growth,could,yes,skip,later
+Support or contact form,support,should,yes,yes,
+SEO metadata sitemap and OG images,seo,must,yes,yes,
+Responsive down to 375px,quality,must,yes,yes,
+Keyboard and screen-reader accessible,quality,must,unknown,yes,
+Their template catalogue and client logos,content,could,yes,skip,owned by the originals

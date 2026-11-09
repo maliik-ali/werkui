@@ -1,0 +1,39 @@
+/* WerkUI tokens. Source of truth: replica/design/tokens.json.
+   Names match the Figma variables one-to-one (color/bg -> --color-bg). */
+@theme static {
+  --color-bg: #07070b;
+  --color-surface: #0f0f16;
+  --color-surface-raised: #171721;
+  --color-border: #26263a;
+  --color-border-input: #6c6c8a;
+  --color-text: #f3f3f8;
+  --color-text-muted: #a1a1b5;
+  --color-accent: #c8f53c;
+  --color-on-accent: #0a0a0f;
+  --color-violet: #8b6cff;
+  --color-violet-soft: #b4a2ff;
+  --color-cyan: #3fd2ff;
+  --color-danger: #ff6b6b;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow-accent: 0 0 0 1px rgba(200, 245, 60, 0.35), 0 8px 40px rgba(200, 245, 60, 0.22);
+  --shadow-glow-violet: 0 0 80px rgba(139, 108, 255, 0.35);
+}
+
+:root {
+  --motion-fast: 140ms;
+  --motion-base: 240ms;
+  --motion-slow: 600ms;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --layout-container: 1200px;
+  --layout-header: 68px;
+}
