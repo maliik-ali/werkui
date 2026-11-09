@@ -15,4 +15,4 @@ export function priceLabel(p: Pick<Product, "priceCents" | "currency">) {
 }
 
 export const isFree = (p: Pick<Product, "priceCents">) => p.priceCents === 0;
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://werkui.com";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.werkui.com";
