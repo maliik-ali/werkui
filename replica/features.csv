@@ -22,7 +22,7 @@ Summary table (platform pages type),detail,must,yes,yes,
 Pages or screens included list,detail,should,yes,yes,
 Features and built-for lists,detail,must,yes,yes,
 Live preview button,detail,must,yes,yes,
-Preview frame with buy bar and device toggle,detail,should,no,yes,improvement over originals
+Preview frame with buy bar,detail,should,no,yes,improvement over originals
 Buy button to hosted checkout,payments,must,yes,yes,Stripe Checkout
 Free template instant access,payments,must,yes,yes,
 Automatic delivery of file link after payment,payments,must,yes,partial,via Stripe payment-link confirmation page; needs Malik's links
