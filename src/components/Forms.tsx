@@ -28,7 +28,7 @@ function Honeypot() {
 export function NewsletterForm({ source }: { source: string }) {
   const [state, action, pending] = useActionState(subscribe, null);
   return (
-    <form action={action} className="relative flex flex-col gap-2 [.on-ink_&_input]:border-white/20 [.on-ink_&_input]:bg-white/10 [.on-ink_&_input]:text-on-ink [.on-ink_&_button]:bg-accent [.on-ink_&_button]:text-on-accent">
+    <form action={action} className="relative flex flex-col gap-2 [.on-ink_&_input]:border-white/20 [.on-ink_&_input]:bg-white/10 [.on-ink_&_input]:text-on-ink [.on-ink_&_button]:bg-accent [.on-ink_&_button]:text-on-accent [.on-ink_&_input]:placeholder:text-ink-muted">
       <Honeypot />
       <input type="hidden" name="source" value={source} />
       <label htmlFor={`nl-${source}`} className="text-sm font-medium">

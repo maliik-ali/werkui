@@ -5,10 +5,10 @@ type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap cursor-pointer select-none transition-[transform,background-color,box-shadow,border-color,color] duration-200 ease-out-soft active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2.5 rounded-[16px] font-medium whitespace-nowrap cursor-pointer select-none transition-[transform,background-color,box-shadow,border-color,color] duration-200 ease-out-soft active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none";
 const variants: Record<Variant, string> = {
-  primary: "bg-ink text-on-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(16,16,16,0.22)]",
-  secondary: "bg-accent text-on-accent hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(160,200,30,0.35)]",
+  primary: "bg-ink text-on-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(7,26,49,0.25)]",
+  secondary: "bg-accent text-on-accent hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(0,107,255,0.35)]",
   ghost: "border border-line bg-surface text-fg hover:border-line-input",
 };
 const sizes: Record<Size, string> = {

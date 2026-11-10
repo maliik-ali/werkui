@@ -1,25 +1,26 @@
 /* WerkUI tokens. Source of truth: replica/design/tokens.json.
    Names match the Figma variables one-to-one (color/bg -> --color-bg). */
 @theme static {
-  --color-bg: #f2f4f1;
+  --color-bg: #fcfbf8;
   --color-surface: #ffffff;
-  --color-surface-raised: #e8ebe6;
-  --color-border: #daded7;
-  --color-border-input: #7a7f78;
-  --color-text: #101010;
-  --color-text-muted: #575757;
-  --color-accent: #c8f53c;
-  --color-on-accent: #101010;
-  --color-link: #4b32c9;
-  --color-violet: #6b4ef0;
-  --color-violet-soft: #4b32c9;
+  --color-surface-raised: #f1efe9;
+  --color-border: #e3e0d8;
+  --color-border-input: #7b8494;
+  --color-text: #071a31;
+  --color-text-muted: #4a5b73;
+  --color-accent: #006bff;
+  --color-on-accent: #ffffff;
+  --color-accent-soft: #9cc8ff;
+  --color-link: #0057d9;
+  --color-violet: #7b61ff;
+  --color-violet-soft: #0057d9;
   --color-cyan: #0a7fa8;
   --color-danger: #c62828;
   --color-success: #0f7a36;
   --color-warning: #8a5a00;
-  --color-ink: #0f0f0f;
-  --color-on-ink: #f3f3f3;
-  --color-ink-muted: #a6a6a6;
+  --color-ink: #071a31;
+  --color-on-ink: #fcfbf8;
+  --color-ink-muted: #a9b6c8;
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -27,8 +28,8 @@
   --radius-xl: 28px;
   --radius-pill: 999px;
 
-  --shadow-card: 0 1px 2px rgba(16, 16, 16, 0.04), 0 8px 24px rgba(16, 16, 16, 0.06);
-  --shadow-glow-accent: 0 0 0 1px rgba(16, 16, 16, 0.9), 0 10px 30px rgba(16, 16, 16, 0.12);
+  --shadow-card: 0 1px 2px rgba(7, 26, 49, 0.04), 0 8px 24px rgba(7, 26, 49, 0.06);
+  --shadow-glow-accent: 0 0 0 1px rgba(7, 26, 49, 0.9), 0 10px 30px rgba(7, 26, 49, 0.12);
   --shadow-glow-violet: 0 0 80px rgba(107, 78, 240, 0.25);
 }
 

@@ -36,7 +36,7 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="ink-panel on-ink mt-24">
+    <footer className="ink-panel on-ink">
       <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_2fr]">
         <div className="max-w-sm">
           <Logo className="[&_span]:text-on-ink" />
@@ -50,7 +50,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {cols.map((c) => (
             <nav key={c.title} aria-label={c.title}>
-              <h2 className="mb-4 text-sm font-medium text-accent">{c.title}</h2>
+              <h2 className="mb-4 text-sm font-medium text-accent-soft">{c.title}</h2>
               <ul className="space-y-1">
                 {c.links.map(([label, href]) => (
                   <li key={href}>

@@ -1,18 +1,40 @@
-import { ArrowRight, Blocks, Eye, Layers, RefreshCw, Rocket, Wand2 } from "lucide-react";
+import { ArrowRight, Asterisk, Blocks, Layers, LayoutPanelLeft, LogIn, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { Backdrop } from "@/components/Backdrop";
 import { ButtonLink } from "@/components/Button";
 import { Cover } from "@/components/Cover";
 import { PlanCards } from "@/components/PlanCards";
 import { Faq, SectionHead } from "@/components/Section";
+import { HowItWorks } from "@/components/HowItWorks";
+import { Stories, type Story } from "@/components/Stories";
 import { TemplateCard } from "@/components/TemplateCard";
 import { getPlans, getProducts } from "@/lib/data";
 
-const steps = [
-  { icon: Eye, title: "Pick and preview", text: "Browse the catalog and open the live preview before you spend anything." },
-  { icon: Wand2, title: "Make it yours", text: "Duplicate the file, swap colours, type and content. Everything is built from components." },
-  { icon: Rocket, title: "Ship", text: "Hand off to developers or publish from Framer or Webflow. Days, not months." },
+/** Real client quote, from malikali.de. Add more here as they come in; never invent one. */
+const stories: Story[] = [
+  {
+    headline: "Hired twice. Still the favourite designer.",
+    quote: "I am surprised by his speed: I have no idea how someone can come up with so many good ideas in such a short amount of time.",
+    name: "Andreas",
+    role: "Founder, Mathebibel · client of Malik Ali",
+    image: "https://cdn.prod.website-files.com/663c3bbe86810f1ed24353d9/665181243f14d4ff3f5d0527_2.webp",
+    imageAlt: "A dashboard screen from the Shopzy UI kit",
+  },
 ];
+
+const platforms = [
+  { label: "Webflow", short: "Wf", cls: "bg-accent text-on-accent" },
+  { label: "Framer", short: "Fr", cls: "bg-ink text-on-ink" },
+  { label: "Figma", short: "Fg", cls: "bg-surface text-fg" },
+];
+
+function Cursor({ className = "" }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className={`cursor-nudge absolute size-6 fill-ink ${className}`}>
+      <path d="M3 2l18 8-8 2.5L10.5 21z" />
+    </svg>
+  );
+}
 
 const reasons = [
   { icon: Layers, title: "Real design systems", text: "Variables, components and named layers, so a change in one place updates everywhere." },
@@ -38,30 +60,39 @@ export default async function Home() {
     <>
       <section className="relative isolate overflow-hidden">
         <Backdrop />
-        <div className="container-x relative pb-10 pt-20 text-center md:pt-28">
-          <p className="reveal eyebrow mx-auto mb-6">
-            Figma · Framer · Webflow
-          </p>
-          <h1 className="reveal mx-auto max-w-4xl text-[44px] font-semibold leading-[1.02] sm:text-6xl md:text-7xl" style={{ "--d": "80ms" } as React.CSSProperties}>
-            <span className="text-gradient">Start from</span> finished.
+        <div className="container-x relative pb-12 pt-20 text-center md:pt-28">
+          <h1 className="reveal mx-auto max-w-5xl text-[44px] font-normal leading-[1.08] sm:text-6xl md:text-[88px]">
+            <span className="inline-flex flex-wrap items-center justify-center gap-x-5">
+              Built to launch
+              <span className="inline-flex -space-x-3 align-middle" role="img" aria-label="Works with Webflow, Framer and Figma">
+                {platforms.map((p) => (
+                  <span key={p.label} title={p.label} className={`grid size-12 place-items-center rounded-full border-2 border-surface text-sm font-semibold tracking-normal shadow-card md:size-[72px] md:text-xl ${p.cls}`}>
+                    {p.short}
+                  </span>
+                ))}
+              </span>
+            </span>
             <br />
-            Ship this week.
+            <span className="relative inline-block">
+              <Cursor className="-left-9 top-1 hidden -scale-x-100 md:block" />
+              <span className="selected"><i /><i />Designed</span> to sell
+            </span>
           </h1>
-          <p className="reveal mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl" style={{ "--d": "160ms" } as React.CSSProperties}>
-            UI kits, dashboards and website templates built by a senior product designer. Preview them live, buy once, and
-            make them yours.
+          <p className="reveal mx-auto mt-8 max-w-xl leading-relaxed text-muted md:text-lg" style={{ "--d": "120ms" } as React.CSSProperties}>
+            UI kits, dashboards and website templates by a senior product designer. Preview the real file, buy once,
+            and make it yours.
           </p>
-          <div className="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ "--d": "240ms" } as React.CSSProperties}>
+          <div className="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ "--d": "200ms" } as React.CSSProperties}>
             <ButtonLink href="/templates" size="lg">
-              Browse templates <ArrowRight aria-hidden="true" size={18} />
+              Browse templates <LayoutPanelLeft aria-hidden="true" size={18} />
             </ButtonLink>
-            <ButtonLink href="/free" size="lg" variant="secondary">
-              Get the free ones
+            <ButtonLink href="/hire" size="lg" variant="secondary">
+              Custom service <LogIn aria-hidden="true" size={18} />
             </ButtonLink>
           </div>
         </div>
         <div className="container-x relative pb-16">
-        <div className="marquee-wrap ink-panel on-ink reveal relative overflow-hidden rounded-[28px] py-6 shadow-[0_30px_80px_rgba(16,16,16,0.25)]" style={{ "--d": "320ms" } as React.CSSProperties}>
+        <div className="marquee-wrap ink-panel on-ink reveal relative overflow-hidden rounded-[28px] py-6 shadow-[0_30px_80px_rgba(7,26,49,0.25)]" style={{ "--d": "320ms" } as React.CSSProperties}>
           <ul className="marquee" aria-label="Featured products">
             {loop.map((p, i) => (
               <li key={`${p.slug}-${i}`} aria-hidden={i >= products.length} className="w-[300px] shrink-0 md:w-[380px]">
@@ -94,22 +125,17 @@ export default async function Home() {
         </ul>
       </section>
 
-      <section className="container-x py-16 md:py-24">
-        <SectionHead eyebrow="How it works" title="From blank file to live product in three moves" />
-        <ol className="grid gap-5 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <li key={s.title} className="reveal card p-7" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
-              <div className="mb-6 flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-2xl bg-accent text-on-accent">
-                  <s.icon aria-hidden="true" size={22} />
-                </span>
-                <span className="font-mono text-sm text-muted">0{i + 1}</span>
-              </div>
-              <h3 className="text-xl font-semibold">{s.title}</h3>
-              <p className="mt-2 leading-relaxed text-muted">{s.text}</p>
-            </li>
-          ))}
-        </ol>
+      <section className="py-16 md:py-24">
+        <div className="container-x">
+          <div className="reveal mx-auto mb-12 max-w-3xl text-center">
+            <h2 className="text-4xl leading-[1.05] md:text-6xl">Built for people who would rather ship than redraw</h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">Four steps from an empty file to a product with your name on it.</p>
+            <ButtonLink href="/templates" size="lg" className="mt-8">Start browsing</ButtonLink>
+          </div>
+          <div className="reveal">
+            <HowItWorks />
+          </div>
+        </div>
       </section>
 
       <section className="container-x py-16 md:py-24">
@@ -171,6 +197,18 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="stories-bg on-ink py-20 text-on-ink md:py-28">
+        <div className="container-x">
+          <div className="reveal mx-auto mb-12 max-w-2xl text-center">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em]">Client stories</p>
+            <h2 className="text-4xl leading-[1.05] md:text-6xl">Real clients. Real words.</h2>
+          </div>
+          <div className="reveal">
+            <Stories stories={stories} tiles={products.map((p) => p.coverUrl).filter((u): u is string => Boolean(u)).slice(2, 6)} />
+          </div>
+        </div>
+      </section>
+
       <section className="container-x py-16 md:py-24">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHead eyebrow="FAQ" title="Questions, answered" lead="Anything else? The support page reaches a human." />
@@ -180,14 +218,29 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="container-x pb-8">
-        <div className="reveal relative isolate overflow-hidden rounded-[28px] border border-line px-6 py-16 text-center md:py-24">
-          <Backdrop className="opacity-80" />
-          <div className="relative">
-            <h2 className="mx-auto max-w-2xl text-4xl font-semibold leading-[1.05] md:text-6xl">Stop redrawing the same screens.</h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-muted">Pick a starting point and spend your time on the parts that make your product different.</p>
-            <ButtonLink href="/templates" size="lg" className="mt-9">Browse templates <ArrowRight aria-hidden="true" size={18} /></ButtonLink>
-          </div>
+      <section className="relative isolate overflow-hidden border-y border-line bg-raised">
+        <div className="wall" aria-hidden="true">
+          {[...products, ...products].slice(0, 16).map((p, i) => (p.coverUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={i} src={p.coverUrl} alt="" loading="lazy" />
+          ) : null))}
+        </div>
+        <div className="container-x relative py-28 text-center md:py-40">
+          <Asterisk aria-hidden="true" size={72} strokeWidth={3} className="mx-auto mb-6" />
+          <h2 className="reveal text-5xl font-normal leading-[1.08] md:text-[84px]">
+            Stop redrawing
+            <br />
+            <span className="relative inline-block">
+              Start <span className="selected"><i /><i />shipping</span>
+              <Cursor className="-bottom-5 -right-7 hidden md:block" />
+            </span>
+          </h2>
+          <p className="reveal mx-auto mt-8 max-w-md text-muted">
+            By Malik Ali: Top Rated Plus on Upwork, Toptal top 3% designer, 132+ products designed.
+          </p>
+          <ButtonLink href="/templates" size="lg" className="mt-8">
+            Browse templates <LayoutPanelLeft aria-hidden="true" size={18} />
+          </ButtonLink>
         </div>
       </section>
     </>
