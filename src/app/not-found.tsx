@@ -9,7 +9,7 @@ export default function NotFound() {
         <div>
           <p className="eyebrow mb-4">404</p>
           <h1 className="text-5xl font-semibold md:text-7xl">This page isn't here</h1>
-          <p className="mx-auto mt-5 max-w-md text-lg text-muted">The link may be old, or the product may have been renamed.</p>
+          <p className="mx-auto mt-5 max-w-md text-lg text-muted-foreground">The link may be old, or the product may have been renamed.</p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/templates" size="lg">Browse templates</ButtonLink>
             <ButtonLink href="/" size="lg" variant="ghost">Go home</ButtonLink>

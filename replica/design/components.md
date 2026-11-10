@@ -1,5 +1,7 @@
 # WerkUI components
 
+Since 10 Nov 2026 the primitives are shadcn/ui (`src/components/ui`): button, card, badge, accordion, tabs, input, textarea, label, radio-group, native-select, sheet, carousel, breadcrumb. The site components below compose them.
+
 Tokens: `tokens.json` (contrast: 21 pairs, 0 AA failures). Icons: Lucide (ISC). Font: Geist (OFL). All copy and artwork original.
 
 ```

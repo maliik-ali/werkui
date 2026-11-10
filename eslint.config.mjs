@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
   ]),
   { rules: { "react/no-unescaped-entities": "off" } },
+  // shadcn/ui source is kept as published upstream
+  { files: ["src/components/ui/**"], rules: { "react-hooks/set-state-in-effect": "off" } },
 ]);
 
 export default eslintConfig;

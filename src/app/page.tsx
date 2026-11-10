@@ -78,7 +78,7 @@ export default async function Home() {
               <span className="selected"><i /><i />Designed</span> to sell
             </span>
           </h1>
-          <p className="reveal mx-auto mt-8 max-w-xl leading-relaxed text-muted md:text-lg" style={{ "--d": "120ms" } as React.CSSProperties}>
+          <p className="reveal mx-auto mt-8 max-w-xl leading-relaxed text-muted-foreground md:text-lg" style={{ "--d": "120ms" } as React.CSSProperties}>
             UI kits, dashboards and website templates by a senior product designer. Preview the real file, buy once,
             and make it yours.
           </p>
@@ -129,7 +129,7 @@ export default async function Home() {
         <div className="container-x">
           <div className="reveal mx-auto mb-12 max-w-3xl text-center">
             <h2 className="text-4xl leading-[1.05] md:text-6xl">Built for people who would rather ship than redraw</h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">Four steps from an empty file to a product with your name on it.</p>
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">Four steps from an empty file to a product with your name on it.</p>
             <ButtonLink href="/templates" size="lg" className="mt-8">Start browsing</ButtonLink>
           </div>
           <div className="reveal">
@@ -161,7 +161,7 @@ export default async function Home() {
             <li key={r.title} className="reveal card p-7" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
               <r.icon aria-hidden="true" size={24} className="text-fg" />
               <h3 className="mt-5 text-xl font-semibold">{r.title}</h3>
-              <p className="mt-2 leading-relaxed text-muted">{r.text}</p>
+              <p className="mt-2 leading-relaxed text-muted-foreground">{r.text}</p>
             </li>
           ))}
         </ul>
@@ -173,7 +173,7 @@ export default async function Home() {
           <div className="reveal mx-auto mb-10 max-w-2xl text-center">
             <p className="eyebrow mb-3">All access</p>
             <h2 className="text-3xl font-semibold leading-[1.1] md:text-[40px]">One pass, every template</h2>
-            <p className="mt-4 text-lg text-muted">Buy single products any time, or unlock the whole library and everything released after it.</p>
+            <p className="mt-4 text-lg text-muted-foreground">Buy single products any time, or unlock the whole library and everything released after it.</p>
           </div>
           <PlanCards plans={plans} />
         </div>
@@ -185,13 +185,13 @@ export default async function Home() {
           <article className="reveal card spot p-8">
             <p className="eyebrow">For teams and full builds</p>
             <h3 className="mt-3 text-2xl font-semibold">Rayvens</h3>
-            <p className="mt-3 leading-relaxed text-muted">A design and development studio that takes a template to a launched site or product: custom pages, CMS, integrations and development.</p>
+            <p className="mt-3 leading-relaxed text-muted-foreground">A design and development studio that takes a template to a launched site or product: custom pages, CMS, integrations and development.</p>
             <ButtonLink href="/hire?path=rayvens#enquiry" className="mt-7">Work with the team <ArrowRight aria-hidden="true" size={16} /></ButtonLink>
           </article>
           <article className="reveal card spot p-8" style={{ "--d": "90ms" } as React.CSSProperties}>
             <p className="eyebrow">For one senior designer</p>
             <h3 className="mt-3 text-2xl font-semibold">Malik Ali</h3>
-            <p className="mt-3 leading-relaxed text-muted">The designer behind these kits, with 10+ years in product UX/UI. Best for redesigns, design systems and focused template customisation.</p>
+            <p className="mt-3 leading-relaxed text-muted-foreground">The designer behind these kits, with 10+ years in product UX/UI. Best for redesigns, design systems and focused template customisation.</p>
             <ButtonLink href="/hire?path=malikali#enquiry" className="mt-7">Work with Malik <ArrowRight aria-hidden="true" size={16} /></ButtonLink>
           </article>
         </div>
@@ -235,7 +235,7 @@ export default async function Home() {
               <Cursor className="-bottom-5 -right-7 hidden md:block" />
             </span>
           </h2>
-          <p className="reveal mx-auto mt-8 max-w-md text-muted">
+          <p className="reveal mx-auto mt-8 max-w-md text-muted-foreground">
             By Malik Ali: Top Rated Plus on Upwork, Toptal top 3% designer, 132+ products designed.
           </p>
           <ButtonLink href="/templates" size="lg" className="mt-8">

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ArrowRight, BadgeCheck, Check, ExternalLink } from "lucide-react";
 import { ButtonLink } from "@/components/Button";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Cover } from "@/components/Cover";
 import { PlatformBadge } from "@/components/PlatformBadge";
 import { Faq } from "@/components/Section";
@@ -63,15 +64,15 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <div className="container-x pt-8">
-        <nav aria-label="Breadcrumb" className="text-sm text-muted">
-          <ol className="flex flex-wrap items-center gap-2">
-            <li><Link href="/" className="hover:text-fg">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li><Link href="/templates" className="hover:text-fg">Templates</Link></li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-fg">{product.name}</li>
-          </ol>
-        </nav>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link href="/">Home</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link href="/templates">Templates</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{product.name}</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
 
       <section className="container-x grid gap-10 py-10 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
@@ -96,7 +97,7 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
           <div className="mt-12 space-y-12">
             <div>
               <h2 className="text-2xl font-semibold">Overview</h2>
-              <p className="mt-4 text-lg leading-relaxed text-muted">{product.description}</p>
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{product.description}</p>
             </div>
             {product.features.length > 0 && (
               <div>
@@ -143,11 +144,11 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
               {product.isNew && <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-on-accent">New</span>}
             </div>
             <h1 className="mt-4 text-3xl leading-tight md:text-4xl">{product.name}</h1>
-            <p className="mt-2 text-lg text-muted">{product.tagline}</p>
+            <p className="mt-2 text-lg text-muted-foreground">{product.tagline}</p>
             <p className="mt-6 flex items-baseline gap-3">
               <span className={`text-4xl font-semibold tracking-tight ${free ? "text-success" : ""}`}>{priceLabel(product)}</span>
-              {product.compareAtCents && <s className="text-muted">{money(product.compareAtCents, product.currency)}</s>}
-              {!free && !soon && <span className="text-sm text-muted">one-time</span>}
+              {product.compareAtCents && <s className="text-muted-foreground">{money(product.compareAtCents, product.currency)}</s>}
+              {!free && !soon && <span className="text-sm text-muted-foreground">one-time</span>}
             </p>
             <div className="mt-6 grid gap-3">
               <ButtonLink href={`/go/${product.slug}`} size="lg" className="w-full">
@@ -160,14 +161,14 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
               )}
             </div>
             {!free && (
-              <p className="mt-4 text-center text-sm text-muted">
+              <p className="mt-4 text-center text-sm text-muted-foreground">
                 Or unlock everything with <Link href="/pricing" className="text-link underline underline-offset-4">All Access</Link>
               </p>
             )}
             <dl className="mt-6 divide-y divide-line border-t border-line text-sm">
               {summary.map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 py-3">
-                  <dt className="text-muted">{k}</dt>
+                  <dt className="text-muted-foreground">{k}</dt>
                   <dd className="text-right font-medium">{v}</dd>
                 </div>
               ))}
@@ -183,9 +184,9 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
                   {seller.displayName}
                   {seller.isVerified && <BadgeCheck aria-label="Verified creator" size={16} className="text-cyan" />}
                 </span>
-                <span className="block truncate text-sm text-muted">{seller.headline}</span>
+                <span className="block truncate text-sm text-muted-foreground">{seller.headline}</span>
               </span>
-              <ExternalLink aria-hidden="true" size={16} className="ml-auto text-muted" />
+              <ExternalLink aria-hidden="true" size={16} className="ml-auto text-muted-foreground" />
             </Link>
           )}
         </aside>

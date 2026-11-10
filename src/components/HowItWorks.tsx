@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Card } from "@/components/ui/card";
 import { CreditCard, Eye, Search, Wand2, type LucideIcon } from "lucide-react";
 
 type Step = { title: string; short: string; long: string; points: string[]; icon: LucideIcon; mock: { label: string; chips: string[] } };
@@ -59,10 +60,10 @@ export function HowItWorks() {
               className="relative z-10 block w-full cursor-pointer p-7 text-left lg:p-8"
             >
               <span className="block text-[28px] font-medium leading-tight tracking-tight">{s.title}</span>
-              <span className={`mt-3 block text-sm leading-relaxed text-muted ${open ? "lg:hidden" : ""}`}>{s.short}</span>
+              <span className={`mt-3 block text-sm leading-relaxed text-muted-foreground ${open ? "lg:hidden" : ""}`}>{s.short}</span>
             </button>
             <div className={`relative z-10 -mt-4 px-7 pb-7 lg:px-8 ${open ? "" : "lg:hidden"}`}>
-              <p className="hidden max-w-sm text-sm leading-relaxed text-muted lg:block">{s.long}</p>
+              <p className="hidden max-w-sm text-sm leading-relaxed text-muted-foreground lg:block">{s.long}</p>
               <ul className="mt-5 space-y-3">
                 {s.points.map((p, n) => (
                   <li key={p} className="flex items-center gap-3 text-sm">
@@ -74,7 +75,7 @@ export function HowItWorks() {
                 ))}
               </ul>
               <div aria-hidden="true" className="mt-7 rounded-[22px] bg-gradient-to-br from-[#bfe0ff] via-[#9fe3d6] to-[#e3f3a6] p-5">
-                <div className="rounded-[16px] bg-surface p-5 shadow-card">
+                <Card className="gap-0 rounded-[16px] border-0 p-5 shadow-card">
                   <div className="flex items-center gap-3">
                     <span className="grid size-9 place-items-center rounded-full bg-accent text-on-accent">
                       <s.icon size={16} />
@@ -88,7 +89,7 @@ export function HowItWorks() {
                       </span>
                     ))}
                   </div>
-                </div>
+                </Card>
               </div>
             </div>
             {/* soft arches on the closed cards */}

@@ -1,49 +1,42 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
+import { Button as UiButton, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
+/** Site button names mapped onto the shadcn/ui Button variants. */
 type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
-
-const base =
-  "inline-flex items-center justify-center gap-2.5 rounded-[16px] font-medium whitespace-nowrap cursor-pointer select-none transition-[transform,background-color,box-shadow,border-color,color] duration-200 ease-out-soft active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none";
-const variants: Record<Variant, string> = {
-  primary: "bg-ink text-on-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(7,26,49,0.25)]",
-  secondary: "bg-accent text-on-accent hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(0,107,255,0.35)]",
-  ghost: "border border-line bg-surface text-fg hover:border-line-input",
-};
-const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-5 text-sm",
-  lg: "h-13 px-7 text-base",
-};
+const variantMap = { primary: "default", secondary: "secondary", ghost: "outline" } as const;
+const sizeMap = { sm: "sm", md: "default", lg: "lg" } as const;
 
 export function buttonClass(variant: Variant = "primary", size: Size = "md", extra = "") {
-  return `${base} ${variants[variant]} ${sizes[size]} ${extra}`;
+  return cn(buttonVariants({ variant: variantMap[variant], size: sizeMap[size] }), extra);
 }
 
 type Props = { variant?: Variant; size?: Size; className?: string; children: ReactNode };
 
-export function ButtonLink({ variant, size, className, children, href, ...rest }: Props & { href: string } & Omit<ComponentProps<"a">, "href" | "className" | "children">) {
-  const cls = buttonClass(variant, size, className);
+export function ButtonLink({ variant = "primary", size = "md", className, children, href, ...rest }: Props & { href: string } & Omit<ComponentProps<"a">, "href" | "className" | "children">) {
   const external = /^https?:\/\//.test(href);
-  if (external || href.startsWith("/go/")) {
-    return (
-      <a href={href} className={cls} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} {...rest}>
-        {children}
-      </a>
-    );
-  }
+  const plain = external || href.startsWith("/go/");
   return (
-    <Link href={href} className={cls} {...rest}>
-      {children}
-    </Link>
+    <UiButton asChild variant={variantMap[variant]} size={sizeMap[size]} className={className}>
+      {plain ? (
+        <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} {...rest}>
+          {children}
+        </a>
+      ) : (
+        <Link href={href} {...rest}>
+          {children}
+        </Link>
+      )}
+    </UiButton>
   );
 }
 
-export function Button({ variant, size, className, children, ...rest }: Props & Omit<ComponentProps<"button">, "className" | "children">) {
+export function Button({ variant = "primary", size = "md", className, children, ...rest }: Props & Omit<ComponentProps<"button">, "className" | "children">) {
   return (
-    <button className={buttonClass(variant, size, className)} {...rest}>
+    <UiButton variant={variantMap[variant]} size={sizeMap[size]} className={className} {...rest}>
       {children}
-    </button>
+    </UiButton>
   );
 }

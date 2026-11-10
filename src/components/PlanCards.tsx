@@ -3,47 +3,43 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import { money } from "@/lib/format";
 import { PLATFORM_LABEL, type Plan } from "@/lib/types";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { buttonClass } from "./Button";
 
 export function PlanCards({ plans }: { plans: Plan[] }) {
   const [billing, setBilling] = useState<"yearly" | "lifetime">("yearly");
   return (
     <div>
-      <div role="radiogroup" aria-label="Billing" className="mx-auto mb-10 flex w-fit rounded-full border border-line bg-surface p-1">
-        {(["yearly", "lifetime"] as const).map((b) => (
-          <button
-            key={b}
-            type="button"
-            role="radio"
-            aria-checked={billing === b}
-            onClick={() => setBilling(b)}
-            className={`min-h-11 cursor-pointer rounded-full px-6 text-sm font-medium transition-colors ${billing === b ? "bg-ink text-on-ink" : "text-muted hover:text-fg"}`}
-          >
-            {b === "yearly" ? "Yearly" : "Lifetime"}
-          </button>
-        ))}
-      </div>
+      <Tabs value={billing} onValueChange={(v) => setBilling(v as "yearly" | "lifetime")} className="mb-10 items-center">
+        <TabsList aria-label="Billing" className="h-auto rounded-[18px] border bg-card p-1 group-data-[orientation=horizontal]/tabs:h-auto">
+          <TabsTrigger value="yearly" className="min-h-11 rounded-[14px] px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Yearly</TabsTrigger>
+          <TabsTrigger value="lifetime" className="min-h-11 rounded-[14px] px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Lifetime</TabsTrigger>
+        </TabsList>
+      </Tabs>
       <ul className="grid gap-5 lg:grid-cols-3">
         {plans.map((p) => {
           const cents = billing === "yearly" ? p.yearlyCents : p.lifetimeCents;
           const url = billing === "yearly" ? p.yearlyPaymentUrl : p.lifetimePaymentUrl;
           const live = cents !== null && url;
           return (
-            <li key={p.slug} className={`card spot relative flex flex-col p-7 ${p.isFeatured ? "border-fg shadow-glow lg:-translate-y-3" : ""}`}>
-              {p.isFeatured && <span className="absolute -top-3 left-7 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent">Best value</span>}
+            <li key={p.slug}>
+              <Card className={`spot relative h-full gap-0 overflow-visible rounded-[20px] p-7 ${p.isFeatured ? "border-fg shadow-glow lg:-translate-y-3" : ""}`}>
+              {p.isFeatured && <Badge variant="secondary" className="absolute -top-3 left-7 rounded-full px-3 py-1 font-semibold">Best value</Badge>}
               <h3 className="text-xl font-semibold">{p.name}</h3>
-              <p className="mt-2 min-h-12 text-muted">{p.blurb}</p>
+              <p className="mt-2 min-h-12 text-muted-foreground">{p.blurb}</p>
               <p className="mt-6 flex items-baseline gap-2">
                 {cents !== null ? (
                   <>
                     <span className="text-5xl font-semibold tracking-tight">{money(cents, p.currency)}</span>
-                    <span className="text-muted">{billing === "yearly" ? "/ year" : "once"}</span>
+                    <span className="text-muted-foreground">{billing === "yearly" ? "/ year" : "once"}</span>
                   </>
                 ) : (
                   <span className="text-3xl font-semibold tracking-tight">Early access</span>
                 )}
               </p>
-              <p className="mt-2 text-sm text-muted">{p.platforms.map((x) => PLATFORM_LABEL[x]).join(" + ")}</p>
+              <p className="mt-2 text-sm text-muted-foreground">{p.platforms.map((x) => PLATFORM_LABEL[x]).join(" + ")}</p>
               <a href={`/go/plan-${p.slug}?billing=${billing}`} className={buttonClass(p.isFeatured ? "primary" : "secondary", "lg", "mt-7 w-full")}>
                 {live ? `Get ${p.name}` : "Join the early list"}
               </a>
@@ -55,6 +51,7 @@ export function PlanCards({ plans }: { plans: Plan[] }) {
                   </li>
                 ))}
               </ul>
+            </Card>
             </li>
           );
         })}

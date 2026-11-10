@@ -4,11 +4,21 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { Search } from "lucide-react";
 import { PLATFORM_LABEL, type Platform, type Product } from "@/lib/types";
+import { Button as UiButton } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { TemplateCard } from "./TemplateCard";
 
 const PLATFORMS: Platform[] = ["figma", "framer", "webflow"];
-const chip = (on: boolean) =>
-  `inline-flex min-h-11 items-center rounded-md border px-4 text-sm font-medium transition-colors cursor-pointer ${on ? "border-ink bg-ink text-on-ink" : "border-line bg-surface text-fg hover:border-line-input"}`;
+function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <UiButton type="button" aria-pressed={on} variant={on ? "default" : "outline"} onClick={onClick} className="rounded-md hover:translate-y-0 hover:shadow-none">
+      {children}
+    </UiButton>
+  );
+}
 
 export function CatalogBrowser({ products, lockPrice }: { products: Product[]; lockPrice?: "free" }) {
   const sp = useSearchParams();
@@ -49,53 +59,42 @@ export function CatalogBrowser({ products, lockPrice }: { products: Product[]; l
 
   return (
     <div>
-      <div className="card mb-8 grid gap-4 p-4 md:p-5">
+      <Card className="mb-8 gap-4 rounded-[20px] p-4 md:p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <div className="relative flex-1">
-            <label htmlFor="catalog-q" className="sr-only">Search templates</label>
-            <Search aria-hidden="true" size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-            <input
-              id="catalog-q"
-              type="search"
-              value={q}
-              onChange={(e) => set("q", e.target.value)}
-              placeholder="Search dashboards, landing pages, style guides…"
-              className="h-12 w-full rounded-md border border-line-input bg-surface pl-11 pr-4 text-base placeholder:text-muted/70 focus:border-fg focus:outline-none"
-            />
+            <Label htmlFor="catalog-q" className="sr-only">Search templates</Label>
+            <Search aria-hidden="true" size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Input id="catalog-q" type="search" value={q} onChange={(e) => set("q", e.target.value)} placeholder="Search dashboards, landing pages, style guides…" className="h-12 rounded-md bg-card pl-11 pr-4 text-base md:text-base" />
           </div>
           <div className="flex items-center gap-2">
-            <label htmlFor="catalog-sort" className="text-sm text-muted">Sort</label>
-            <select id="catalog-sort" value={sort} onChange={(e) => set("sort", e.target.value === "new" ? "" : e.target.value)} className="h-12 rounded-md border border-line-input bg-surface px-4 text-sm">
-              <option value="new">Newest</option>
-              <option value="price-asc">Price: low to high</option>
-              <option value="price-desc">Price: high to low</option>
-            </select>
+            <Label htmlFor="catalog-sort" className="font-normal text-muted-foreground">Sort</Label>
+            <NativeSelect id="catalog-sort" value={sort} onChange={(e) => set("sort", e.target.value === "new" ? "" : e.target.value)} className="h-12 rounded-md bg-card py-0">
+              <NativeSelectOption value="new">Newest</NativeSelectOption>
+              <NativeSelectOption value="price-asc">Price: low to high</NativeSelectOption>
+              <NativeSelectOption value="price-desc">Price: high to low</NativeSelectOption>
+            </NativeSelect>
           </div>
         </div>
         <div className="flex flex-wrap gap-2" role="group" aria-label="Platform">
-          <button type="button" aria-pressed={!platform} className={chip(!platform)} onClick={() => set("platform", "")}>All platforms</button>
+          <Chip on={!platform} onClick={() => set("platform", "")}>All platforms</Chip>
           {PLATFORMS.map((p) => (
-            <button key={p} type="button" aria-pressed={platform === p} className={chip(platform === p)} onClick={() => set("platform", platform === p ? "" : p)}>
-              {PLATFORM_LABEL[p]}
-            </button>
+            <Chip key={p} on={platform === p} onClick={() => set("platform", platform === p ? "" : p)}>{PLATFORM_LABEL[p]}</Chip>
           ))}
           <span aria-hidden="true" className="mx-1 hidden w-px self-stretch bg-line sm:block" />
           {categories.map(([slug, name]) => (
-            <button key={slug} type="button" aria-pressed={category === slug} className={chip(category === slug)} onClick={() => set("category", category === slug ? "" : slug)}>
-              {name}
-            </button>
+            <Chip key={slug} on={category === slug} onClick={() => set("category", category === slug ? "" : slug)}>{name}</Chip>
           ))}
           {!lockPrice && (
             <>
               <span aria-hidden="true" className="mx-1 hidden w-px self-stretch bg-line sm:block" />
-              <button type="button" aria-pressed={price === "free"} className={chip(price === "free")} onClick={() => set("price", price === "free" ? "" : "free")}>Free</button>
-              <button type="button" aria-pressed={price === "paid"} className={chip(price === "paid")} onClick={() => set("price", price === "paid" ? "" : "paid")}>Premium</button>
+              <Chip on={price === "free"} onClick={() => set("price", price === "free" ? "" : "free")}>Free</Chip>
+              <Chip on={price === "paid"} onClick={() => set("price", price === "paid" ? "" : "paid")}>Premium</Chip>
             </>
           )}
         </div>
-      </div>
+      </Card>
 
-      <p className="mb-5 text-sm text-muted" role="status" aria-live="polite">
+      <p className="mb-5 text-sm text-muted-foreground" role="status" aria-live="polite">
         {shown.length} {shown.length === 1 ? "product" : "products"}
         {active && (
           <>
@@ -118,7 +117,7 @@ export function CatalogBrowser({ products, lockPrice }: { products: Product[]; l
       ) : (
         <div className="card grid place-items-center gap-3 px-6 py-16 text-center">
           <p className="text-xl font-semibold">Nothing here yet</p>
-          <p className="max-w-md text-muted">
+          <p className="max-w-md text-muted-foreground">
             {platform && !category && !q
               ? `${PLATFORM_LABEL[platform as Platform] ?? "These"} templates are in the works.`
               : "No product matches those filters."}{" "}

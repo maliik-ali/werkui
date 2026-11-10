@@ -31,7 +31,7 @@ async function Preview({ params }: Pick<PageProps<"/preview/[slug]">, "params">)
   return (
     <div className="container-x py-6">
       <div className="card sticky top-[76px] z-10 flex flex-wrap items-center justify-between gap-3 p-3 pl-5">
-        <Link href={`/templates/${product.slug}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-muted hover:text-fg">
+        <Link href={`/templates/${product.slug}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground hover:text-fg">
           <ArrowLeft aria-hidden="true" size={16} /> {product.name}
         </Link>
         <div className="flex items-center gap-2">
@@ -52,7 +52,7 @@ async function Preview({ params }: Pick<PageProps<"/preview/[slug]">, "params">)
           <div className="group w-full max-w-xl overflow-hidden rounded-[14px]">
             <Cover product={product} />
           </div>
-          <p className="max-w-md text-muted">
+          <p className="max-w-md text-muted-foreground">
             {url ? "This preview opens on Figma, which can't be shown inside another site." : "A live preview for this product is on its way."}
           </p>
           {url && (

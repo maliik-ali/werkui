@@ -33,7 +33,7 @@ export default async function PricingPage() {
           <div className="card overflow-x-auto">
             <table className="w-full min-w-[520px] text-left text-sm md:text-base">
               <thead>
-                <tr className="border-b border-line text-muted">
+                <tr className="border-b border-line text-muted-foreground">
                   <th scope="col" className="p-5 font-medium">What you get</th>
                   <th scope="col" className="p-5 font-medium">Single product</th>
                   <th scope="col" className="p-5 font-medium text-link">Pass</th>
@@ -45,7 +45,7 @@ export default async function PricingPage() {
                     <th scope="row" className="p-5 font-normal">{label}</th>
                     {[single, pass].map((v, i) => (
                       <td key={i} className="p-5">
-                        {v ? <Check aria-label="Included" size={20} className="text-link" /> : <Minus aria-label="Not included" size={20} className="text-muted" />}
+                        {v ? <Check aria-label="Included" size={20} className="text-link" /> : <Minus aria-label="Not included" size={20} className="text-muted-foreground" />}
                       </td>
                     ))}
                   </tr>

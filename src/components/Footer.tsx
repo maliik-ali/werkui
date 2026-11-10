@@ -40,7 +40,7 @@ export function Footer() {
       <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_2fr]">
         <div className="max-w-sm">
           <Logo className="[&_span]:text-on-ink" />
-          <p className="mt-4 leading-relaxed text-muted">
+          <p className="mt-4 leading-relaxed text-muted-foreground">
             UI kits and website templates for Figma, Framer and Webflow. Designed by Malik Ali, built by Rayvens.
           </p>
           <div className="mt-6">
@@ -64,7 +64,7 @@ export function Footer() {
           ))}
         </div>
       </div>
-      <div className="container-x flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-muted sm:flex-row sm:justify-between">
+      <div className="container-x flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-muted-foreground sm:flex-row sm:justify-between">
         <p>© 2026 WerkUI. A Rayvens product.</p>
         <p>
           <a className="hover:text-on-ink" href="https://rayvens.com" target="_blank" rel="noopener noreferrer">rayvens.com</a>

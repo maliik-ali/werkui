@@ -41,7 +41,7 @@ async function Profile({ params }: Pick<PageProps<"/creators/[handle]">, "params
               {seller.isVerified && <BadgeCheck aria-label="Verified creator" className="text-cyan" size={28} />}
             </h1>
             <p className="mt-2 text-lg text-violet-soft">{seller.headline}</p>
-            <p className="mt-4 max-w-2xl leading-relaxed text-muted">{seller.bio}</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">{seller.bio}</p>
           </div>
           <div className="flex flex-wrap gap-3 md:flex-col">
             {seller.websiteUrl && (
@@ -58,13 +58,13 @@ async function Profile({ params }: Pick<PageProps<"/creators/[handle]">, "params
         {groups.length === 0 && (
           <div className="card px-6 py-16 text-center">
             <p className="text-xl font-semibold">No products listed yet</p>
-            <p className="mt-2 text-muted">{seller.displayName} offers services through WerkUI. Use the button above to get in touch.</p>
+            <p className="mt-2 text-muted-foreground">{seller.displayName} offers services through WerkUI. Use the button above to get in touch.</p>
           </div>
         )}
         {groups.map(([kind, list]) => (
           <section key={kind} className="mb-16">
             <h2 className="mb-6 flex items-baseline gap-3 text-2xl font-semibold">
-              {KIND_LABEL[kind]} <span className="text-base font-normal text-muted">{list.length}</span>
+              {KIND_LABEL[kind]} <span className="text-base font-normal text-muted-foreground">{list.length}</span>
             </h2>
             <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {list.map((p) => (

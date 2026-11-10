@@ -1,19 +1,20 @@
+import { Badge } from "@/components/ui/badge";
 import { PLATFORM_LABEL, type Platform } from "@/lib/types";
 
 const dot: Record<Platform, string> = {
   figma: "#ff7262",
-  framer: "#3fd2ff",
-  webflow: "#6f8bff",
-  wordpress: "#9fb4c7",
-  bootstrap: "#b48bff",
-  mui: "#5aa9ff",
+  framer: "#0a7fa8",
+  webflow: "#006bff",
+  wordpress: "#4a5b73",
+  bootstrap: "#7b61ff",
+  mui: "#0057d9",
 };
 
 export function PlatformBadge({ platform }: { platform: Platform }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-xs font-medium text-muted">
+    <Badge variant="outline" className="gap-1.5 rounded-full bg-card px-2.5 py-1 font-medium text-muted-foreground">
       <span aria-hidden="true" className="size-1.5 rounded-full" style={{ background: dot[platform] }} />
       {PLATFORM_LABEL[platform]}
-    </span>
+    </Badge>
   );
 }

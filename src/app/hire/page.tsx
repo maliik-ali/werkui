@@ -61,7 +61,7 @@ export default function HirePage({ searchParams }: PageProps<"/hire">) {
             <article key={p.key} className="reveal card spot flex flex-col p-8" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
               <p className="eyebrow">{p.eyebrow}</p>
               <h3 className="mt-3 text-3xl font-semibold">{p.name}</h3>
-              <p className="mt-3 leading-relaxed text-muted">{p.text}</p>
+              <p className="mt-3 leading-relaxed text-muted-foreground">{p.text}</p>
               <ul className="my-7 space-y-3">
                 {p.points.map((pt) => (
                   <li key={pt} className="flex gap-3">
@@ -88,7 +88,7 @@ export default function HirePage({ searchParams }: PageProps<"/hire">) {
             <li key={t} className="reveal card p-7" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
               <span className="font-mono text-sm text-link">0{i + 1}</span>
               <h3 className="mt-4 text-xl font-semibold">{t}</h3>
-              <p className="mt-2 leading-relaxed text-muted">{d}</p>
+              <p className="mt-2 leading-relaxed text-muted-foreground">{d}</p>
             </li>
           ))}
         </ol>
@@ -98,7 +98,7 @@ export default function HirePage({ searchParams }: PageProps<"/hire">) {
         <div>
           <p className="eyebrow mb-3">Enquiry</p>
           <h2 className="text-3xl font-semibold md:text-[40px]">Tell us about the project</h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted">Not sure which option fits? Choose “Not sure yet” and we'll point you the right way.</p>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Not sure which option fits? Choose “Not sure yet” and we'll point you the right way.</p>
         </div>
         <Suspense fallback={<div className="card h-[520px] animate-pulse" aria-hidden="true" />}>
           <Enquiry searchParams={searchParams} />

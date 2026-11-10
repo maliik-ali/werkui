@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import { Button as UiButton } from "@/components/ui/button";
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ButtonLink } from "./Button";
 import { Logo } from "./Logo";
 
@@ -32,21 +34,32 @@ export function Nav() {
             Hire experts
           </ButtonLink>
         </div>
-        <details className="group relative md:hidden">
-          <summary aria-label="Open menu" className="grid size-11 place-items-center rounded-full border border-line text-fg">
-            <Menu size={20} aria-hidden="true" />
-          </summary>
-          <nav aria-label="Mobile" className="card absolute right-0 top-14 flex w-64 flex-col gap-1 p-3">
-            {links.map((l) => (
-              <Link key={l.href} href={l.href} className="rounded-md px-4 py-3 text-base text-fg hover:bg-raised">
-                {l.label}
-              </Link>
-            ))}
-            <ButtonLink href="/templates" className="mt-2">
-              Browse templates
-            </ButtonLink>
-          </nav>
-        </details>
+        <Sheet>
+          <SheetTrigger asChild>
+            <UiButton variant="outline" size="icon" aria-label="Open menu" className="md:hidden">
+              <Menu aria-hidden="true" />
+            </UiButton>
+          </SheetTrigger>
+          <SheetContent side="right" className="gap-2 p-6">
+            <SheetHeader className="p-0">
+              <SheetTitle className="text-left text-sm font-medium text-muted-foreground">Menu</SheetTitle>
+            </SheetHeader>
+            <nav aria-label="Mobile" className="flex flex-col gap-1">
+              {[...links, { href: "/hire", label: "Hire experts" }].map((l) => (
+                <SheetClose asChild key={l.href}>
+                  <Link href={l.href} className="rounded-md px-3 py-3 text-lg hover:bg-muted">
+                    {l.label}
+                  </Link>
+                </SheetClose>
+              ))}
+            </nav>
+            <SheetClose asChild>
+              <ButtonLink href="/templates" className="mt-4">
+                Browse templates
+              </ButtonLink>
+            </SheetClose>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
