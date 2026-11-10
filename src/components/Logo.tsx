@@ -6,7 +6,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <path d="M6.5 8.5l3 9 3.5-7 3.5 7 3-9" fill="none" stroke="var(--color-on-accent)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span className="text-[17px] text-fg">
-        Werk<span className="text-muted">UI</span>
+        Werk<span className="opacity-60">UI</span>
       </span>
     </span>
   );

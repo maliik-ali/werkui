@@ -17,7 +17,7 @@ export function PlanCards({ plans }: { plans: Plan[] }) {
             role="radio"
             aria-checked={billing === b}
             onClick={() => setBilling(b)}
-            className={`min-h-11 cursor-pointer rounded-full px-6 text-sm font-medium transition-colors ${billing === b ? "bg-fg text-bg" : "text-muted hover:text-fg"}`}
+            className={`min-h-11 cursor-pointer rounded-full px-6 text-sm font-medium transition-colors ${billing === b ? "bg-ink text-on-ink" : "text-muted hover:text-fg"}`}
           >
             {b === "yearly" ? "Yearly" : "Lifetime"}
           </button>
@@ -29,7 +29,7 @@ export function PlanCards({ plans }: { plans: Plan[] }) {
           const url = billing === "yearly" ? p.yearlyPaymentUrl : p.lifetimePaymentUrl;
           const live = cents !== null && url;
           return (
-            <li key={p.slug} className={`card spot relative flex flex-col p-7 ${p.isFeatured ? "border-accent/50 shadow-glow lg:-translate-y-3" : ""}`}>
+            <li key={p.slug} className={`card spot relative flex flex-col p-7 ${p.isFeatured ? "border-fg shadow-glow lg:-translate-y-3" : ""}`}>
               {p.isFeatured && <span className="absolute -top-3 left-7 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent">Best value</span>}
               <h3 className="text-xl font-semibold">{p.name}</h3>
               <p className="mt-2 min-h-12 text-muted">{p.blurb}</p>
@@ -50,7 +50,7 @@ export function PlanCards({ plans }: { plans: Plan[] }) {
               <ul className="mt-7 space-y-3 border-t border-line pt-6">
                 {p.perks.map((perk) => (
                   <li key={perk} className="flex gap-3 text-sm">
-                    <Check aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-accent" />
+                    <Check aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-link" />
                     {perk}
                   </li>
                 ))}

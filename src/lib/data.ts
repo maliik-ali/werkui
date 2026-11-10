@@ -1,4 +1,5 @@
 import { cacheLife, cacheTag } from "next/cache";
+import { media } from "@/data/media";
 import { plans as seedPlans, products as seedProducts, sellers as seedSellers } from "@/data/seed";
 import { supabase } from "./supabase";
 import type { Plan, Product, Seller } from "./types";
@@ -6,6 +7,9 @@ import type { Plan, Product, Seller } from "./types";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 function toProduct(r: any): Product {
+  // Images are linked straight from the CDN list in src/data/media.ts unless the database row sets its own.
+  const m = media[r.slug];
+  const dbImages: string[] = [...(r.images ?? [])].sort((a: any, b: any) => a.position - b.position).map((i: any) => i.url);
   return {
     slug: r.slug,
     sellerHandle: r.seller?.handle ?? "malik-ali",
@@ -20,7 +24,8 @@ function toProduct(r: any): Product {
     currency: r.currency,
     paymentUrl: r.payment_url,
     coverHue: r.cover_hue,
-    coverUrl: r.cover_url,
+    coverUrl: r.cover_url ?? m?.images[0] ?? null,
+    images: dbImages.length ? dbImages : (m?.images ?? []),
     layout: r.stats?.layout ?? "dashboard",
     screensCount: r.screens_count,
     features: r.features ?? [],
@@ -45,7 +50,7 @@ export async function getProducts(): Promise<Product[]> {
   if (db) {
     const { data, error } = await db
       .from("wk_products")
-      .select("*, seller:wk_sellers(handle), category:wk_categories(name, slug), variants:wk_product_variants(platform, preview_url, free_access_url)")
+      .select("*, seller:wk_sellers(handle), category:wk_categories(name, slug), variants:wk_product_variants(platform, preview_url, free_access_url), images:wk_product_images(url, position)")
       .eq("status", "published")
       .order("published_at", { ascending: false });
     if (!error && data && data.length) return data.map(toProduct);

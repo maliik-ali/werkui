@@ -36,7 +36,7 @@ async function Preview({ params }: Pick<PageProps<"/preview/[slug]">, "params">)
         </Link>
         <div className="flex items-center gap-2">
           {url && (
-            <ButtonLink href={url} variant="secondary" size="sm">
+            <ButtonLink href={url} variant="ghost" size="sm">
               Open in new tab <ExternalLink aria-hidden="true" size={14} />
             </ButtonLink>
           )}

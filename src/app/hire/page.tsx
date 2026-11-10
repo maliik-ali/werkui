@@ -50,7 +50,7 @@ export default function HirePage({ searchParams }: PageProps<"/hire">) {
       <PageHero eyebrow="Hire experts" title="Want it done for you?" lead="The people who design and build WerkUI templates can customise one for you, or create your product from scratch.">
         <div className="mt-8 flex flex-wrap gap-3">
           <ButtonLink href="#enquiry" size="lg">Start a project</ButtonLink>
-          <ButtonLink href="/templates" size="lg" variant="secondary">Browse templates first</ButtonLink>
+          <ButtonLink href="/templates" size="lg" variant="ghost">Browse templates first</ButtonLink>
         </div>
       </PageHero>
 
@@ -65,7 +65,7 @@ export default function HirePage({ searchParams }: PageProps<"/hire">) {
               <ul className="my-7 space-y-3">
                 {p.points.map((pt) => (
                   <li key={pt} className="flex gap-3">
-                    <Check aria-hidden="true" size={18} className="mt-1 shrink-0 text-accent" />
+                    <Check aria-hidden="true" size={18} className="mt-1 shrink-0 text-link" />
                     {pt}
                   </li>
                 ))}
@@ -86,7 +86,7 @@ export default function HirePage({ searchParams }: PageProps<"/hire">) {
         <ol className="grid gap-5 md:grid-cols-3">
           {process.map(([t, d], i) => (
             <li key={t} className="reveal card p-7" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
-              <span className="font-mono text-sm text-accent">0{i + 1}</span>
+              <span className="font-mono text-sm text-link">0{i + 1}</span>
               <h3 className="mt-4 text-xl font-semibold">{t}</h3>
               <p className="mt-2 leading-relaxed text-muted">{d}</p>
             </li>

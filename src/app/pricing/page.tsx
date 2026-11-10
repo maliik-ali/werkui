@@ -36,7 +36,7 @@ export default async function PricingPage() {
                 <tr className="border-b border-line text-muted">
                   <th scope="col" className="p-5 font-medium">What you get</th>
                   <th scope="col" className="p-5 font-medium">Single product</th>
-                  <th scope="col" className="p-5 font-medium text-accent">Pass</th>
+                  <th scope="col" className="p-5 font-medium text-link">Pass</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-line">
@@ -45,7 +45,7 @@ export default async function PricingPage() {
                     <th scope="row" className="p-5 font-normal">{label}</th>
                     {[single, pass].map((v, i) => (
                       <td key={i} className="p-5">
-                        {v ? <Check aria-label="Included" size={20} className="text-accent" /> : <Minus aria-label="Not included" size={20} className="text-muted" />}
+                        {v ? <Check aria-label="Included" size={20} className="text-link" /> : <Minus aria-label="Not included" size={20} className="text-muted" />}
                       </td>
                     ))}
                   </tr>
@@ -60,9 +60,9 @@ export default async function PricingPage() {
           <Faq
             items={[
               { q: "What's the difference between yearly and lifetime?", a: "Yearly gives you access to the library, including new releases, for 12 months. Lifetime is a single payment with no renewal. Files you duplicated stay yours either way." },
-              { q: "Can I use pass products for clients?", a: <>Yes, on unlimited projects. The <Link href="/license" className="text-accent underline underline-offset-4">license</Link> has the details.</> },
+              { q: "Can I use pass products for clients?", a: <>Yes, on unlimited projects. The <Link href="/license" className="text-link underline underline-offset-4">license</Link> has the details.</> },
               { q: "Do I need a pass to buy one template?", a: "No. Every product has its own buy button and price." },
-              { q: "I need changes made for me. Is that in the pass?", a: <>Customisation is a separate service. See <Link href="/hire" className="text-accent underline underline-offset-4">Hire experts</Link>.</> },
+              { q: "I need changes made for me. Is that in the pass?", a: <>Customisation is a separate service. See <Link href="/hire" className="text-link underline underline-offset-4">Hire experts</Link>.</> },
             ]}
           />
         </section>

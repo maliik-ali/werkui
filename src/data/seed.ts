@@ -1,4 +1,5 @@
 import type { Plan, Product, Seller } from "@/lib/types";
+import { media } from "./media";
 
 /**
  * Launch catalog. Used when Supabase is not configured, and as the seed for the database.
@@ -46,7 +47,7 @@ const base = {
   isFeatured: false,
 };
 
-export const products: Product[] = [
+const baseProducts: Omit<Product, "images">[] = [
   {
     ...base,
     slug: "shopzy",
@@ -234,6 +235,22 @@ export const products: Product[] = [
     variants: figma(true),
   },
 ];
+
+/** Catalog with real cover / gallery images and Figma Community links merged in. */
+export const products: Product[] = baseProducts.map((p) => {
+  const m = media[p.slug];
+  if (!m) return { ...p, images: [] };
+  return {
+    ...p,
+    coverUrl: m.images[0] ?? null,
+    images: m.images,
+    variants: p.variants.map((v) =>
+      v.platform === "figma" && m.figmaUrl
+        ? { ...v, previewUrl: m.figmaUrl, freeAccessUrl: p.priceCents === 0 ? m.figmaUrl : null }
+        : v,
+    ),
+  };
+});
 
 /** Draft plans. Prices and payment links are Malik's to set; null shows "Early access". */
 export const plans: Plan[] = [

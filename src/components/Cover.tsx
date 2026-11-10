@@ -9,7 +9,7 @@ export function Cover({ product, className = "" }: { product: Pick<Product, "cov
   if (product.coverUrl) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={product.coverUrl} alt="" loading="lazy" className={`aspect-[4/3] w-full rounded-[inherit] object-cover ${className}`} />
+      <img src={product.coverUrl} alt="" loading="lazy" className={`aspect-[4/3] w-full rounded-[inherit] bg-raised object-cover object-top transition-transform duration-500 ease-out-soft group-hover:scale-[1.03] ${className}`} />
     );
   }
   return (

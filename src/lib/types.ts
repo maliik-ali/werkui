@@ -35,6 +35,7 @@ export interface Product {
   paymentUrl: string | null;
   coverHue: number;
   coverUrl: string | null;
+  images: string[];
   layout: "dashboard" | "landing" | "doc" | "mobile";
   screensCount: number | null;
   features: string[];

@@ -22,10 +22,10 @@ const reasons = [
 
 const faq = [
   { q: "What do I get when I buy?", a: "A link to duplicate the file into your own Figma, Framer or Webflow account, shown right after payment and included in your receipt." },
-  { q: "Can I use a template for client work?", a: <>Yes. One purchase covers unlimited projects for you and your clients. You can't resell or redistribute the files themselves. See the <Link className="text-accent underline underline-offset-4" href="/license">license</Link>.</> },
+  { q: "Can I use a template for client work?", a: <>Yes. One purchase covers unlimited projects for you and your clients. You can't resell or redistribute the files themselves. See the <Link className="text-link underline underline-offset-4" href="/license">license</Link>.</> },
   { q: "Are the free products really free?", a: "Yes. Free products open straight in Figma Community with no account on WerkUI needed." },
-  { q: "Can someone customise it for me?", a: <>Yes. Rayvens takes on full builds with a team, and Malik Ali is available as a single senior designer. <Link className="text-accent underline underline-offset-4" href="/hire">See the options</Link>.</> },
-  { q: "Do you offer refunds?", a: <>Digital files can't be returned, so sales are final unless the file is broken or not as described. Details on the <Link className="text-accent underline underline-offset-4" href="/refunds">refunds page</Link>.</> },
+  { q: "Can someone customise it for me?", a: <>Yes. Rayvens takes on full builds with a team, and Malik Ali is available as a single senior designer. <Link className="text-link underline underline-offset-4" href="/hire">See the options</Link>.</> },
+  { q: "Do you offer refunds?", a: <>Digital files can't be returned, so sales are final unless the file is broken or not as described. Details on the <Link className="text-link underline underline-offset-4" href="/refunds">refunds page</Link>.</> },
 ];
 
 export default async function Home() {
@@ -39,11 +39,11 @@ export default async function Home() {
       <section className="relative isolate overflow-hidden">
         <Backdrop />
         <div className="container-x relative pb-10 pt-20 text-center md:pt-28">
-          <p className="reveal eyebrow mx-auto mb-6 w-fit rounded-full border border-line bg-surface/60 px-4 py-2 backdrop-blur">
+          <p className="reveal eyebrow mx-auto mb-6">
             Figma · Framer · Webflow
           </p>
           <h1 className="reveal mx-auto max-w-4xl text-[44px] font-semibold leading-[1.02] sm:text-6xl md:text-7xl" style={{ "--d": "80ms" } as React.CSSProperties}>
-            Start from <span className="text-gradient">finished.</span>
+            <span className="text-gradient">Start from</span> finished.
             <br />
             Ship this week.
           </h1>
@@ -60,19 +60,21 @@ export default async function Home() {
             </ButtonLink>
           </div>
         </div>
-        <div className="marquee-wrap relative mt-8 pb-20" style={{ maskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)" }}>
+        <div className="container-x relative pb-16">
+        <div className="marquee-wrap ink-panel on-ink reveal relative overflow-hidden rounded-[28px] py-6 shadow-[0_30px_80px_rgba(16,16,16,0.25)]" style={{ "--d": "320ms" } as React.CSSProperties}>
           <ul className="marquee" aria-label="Featured products">
             {loop.map((p, i) => (
               <li key={`${p.slug}-${i}`} aria-hidden={i >= products.length} className="w-[300px] shrink-0 md:w-[380px]">
-                <Link href={`/templates/${p.slug}`} tabIndex={i >= products.length ? -1 : 0} className="group block rounded-[20px] border border-line bg-surface p-2 transition-colors hover:border-line-input">
+                <Link href={`/templates/${p.slug}`} tabIndex={i >= products.length ? -1 : 0} className="group block rounded-[20px] border border-white/10 bg-white/5 p-2 transition-colors hover:border-white/30">
                   <div className="overflow-hidden rounded-[14px]">
                     <Cover product={p} />
                   </div>
-                  <span className="block px-2 py-3 text-left text-sm font-medium">{p.name}</span>
+                  <span className="block px-2 pb-1 pt-3 text-left text-sm font-medium text-on-ink">{p.name}</span>
                 </Link>
               </li>
             ))}
           </ul>
+        </div>
         </div>
       </section>
 
@@ -81,7 +83,7 @@ export default async function Home() {
           eyebrow="Featured"
           title="The kits people start with"
           lead="Dashboards and websites you can ship as they are, or pull apart for parts."
-          action={<ButtonLink href="/templates" variant="secondary">See all templates</ButtonLink>}
+          action={<ButtonLink href="/templates" variant="ghost">See all templates</ButtonLink>}
         />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p, i) => (
@@ -98,7 +100,7 @@ export default async function Home() {
           {steps.map((s, i) => (
             <li key={s.title} className="reveal card p-7" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
               <div className="mb-6 flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-2xl bg-accent/10 text-accent">
+                <span className="grid size-12 place-items-center rounded-2xl bg-accent text-on-accent">
                   <s.icon aria-hidden="true" size={22} />
                 </span>
                 <span className="font-mono text-sm text-muted">0{i + 1}</span>
@@ -115,7 +117,7 @@ export default async function Home() {
           eyebrow="Free"
           title="Try the quality before you pay"
           lead="Full files, not teasers. Open them in Figma Community and duplicate."
-          action={<ButtonLink href="/free" variant="secondary">All free products</ButtonLink>}
+          action={<ButtonLink href="/free" variant="ghost">All free products</ButtonLink>}
         />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {free.map((p, i) => (
@@ -131,7 +133,7 @@ export default async function Home() {
         <ul className="grid gap-5 md:grid-cols-3">
           {reasons.map((r, i) => (
             <li key={r.title} className="reveal card p-7" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
-              <r.icon aria-hidden="true" size={24} className="text-violet-soft" />
+              <r.icon aria-hidden="true" size={24} className="text-fg" />
               <h3 className="mt-5 text-xl font-semibold">{r.title}</h3>
               <p className="mt-2 leading-relaxed text-muted">{r.text}</p>
             </li>
@@ -158,13 +160,13 @@ export default async function Home() {
             <p className="eyebrow">For teams and full builds</p>
             <h3 className="mt-3 text-2xl font-semibold">Rayvens</h3>
             <p className="mt-3 leading-relaxed text-muted">A design and development studio that takes a template to a launched site or product: custom pages, CMS, integrations and development.</p>
-            <ButtonLink href="/hire?path=rayvens#enquiry" variant="secondary" className="mt-7">Work with the team <ArrowRight aria-hidden="true" size={16} /></ButtonLink>
+            <ButtonLink href="/hire?path=rayvens#enquiry" className="mt-7">Work with the team <ArrowRight aria-hidden="true" size={16} /></ButtonLink>
           </article>
           <article className="reveal card spot p-8" style={{ "--d": "90ms" } as React.CSSProperties}>
             <p className="eyebrow">For one senior designer</p>
             <h3 className="mt-3 text-2xl font-semibold">Malik Ali</h3>
             <p className="mt-3 leading-relaxed text-muted">The designer behind these kits, with 10+ years in product UX/UI. Best for redesigns, design systems and focused template customisation.</p>
-            <ButtonLink href="/hire?path=malikali#enquiry" variant="secondary" className="mt-7">Work with Malik <ArrowRight aria-hidden="true" size={16} /></ButtonLink>
+            <ButtonLink href="/hire?path=malikali#enquiry" className="mt-7">Work with Malik <ArrowRight aria-hidden="true" size={16} /></ButtonLink>
           </article>
         </div>
       </section>

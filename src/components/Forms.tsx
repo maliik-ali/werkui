@@ -4,7 +4,7 @@ import { submitLead, subscribe, type FormState } from "@/lib/actions";
 import { Button } from "./Button";
 
 const field =
-  "h-12 w-full rounded-xl border border-line-input bg-bg px-4 text-base text-fg placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-accent";
+  "h-12 w-full rounded-md border border-line-input bg-surface px-4 text-base text-fg placeholder:text-muted/70 transition-colors focus:border-fg focus:outline-none focus-visible:outline-2 focus-visible:outline-fg";
 
 function Status({ state }: { state: FormState }) {
   return (
@@ -28,7 +28,7 @@ function Honeypot() {
 export function NewsletterForm({ source }: { source: string }) {
   const [state, action, pending] = useActionState(subscribe, null);
   return (
-    <form action={action} className="relative flex flex-col gap-2">
+    <form action={action} className="relative flex flex-col gap-2 [.on-ink_&_input]:border-white/20 [.on-ink_&_input]:bg-white/10 [.on-ink_&_input]:text-on-ink [.on-ink_&_button]:bg-accent [.on-ink_&_button]:text-on-accent">
       <Honeypot />
       <input type="hidden" name="source" value={source} />
       <label htmlFor={`nl-${source}`} className="text-sm font-medium">
@@ -67,8 +67,8 @@ export function LeadForm({ defaultPath = "unsure", productSlug, topic }: { defau
             ["malikali", "One senior designer"],
             ["unsure", "Not sure yet"],
           ].map(([v, label]) => (
-            <label key={v} className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-line-input px-4 text-sm has-checked:border-accent has-checked:bg-accent/10">
-              <input type="radio" name="path" value={v} defaultChecked={v === defaultPath} className="accent-(--color-accent)" />
+            <label key={v} className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md border border-line-input px-4 text-sm has-checked:border-fg has-checked:bg-accent/40">
+              <input type="radio" name="path" value={v} defaultChecked={v === defaultPath} className="accent-(--color-text)" />
               {label}
             </label>
           ))}

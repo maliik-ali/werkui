@@ -7,13 +7,13 @@ const links = [
   { href: "/templates", label: "Templates" },
   { href: "/free", label: "Free" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/hire", label: "Hire experts" },
+  { href: "/support", label: "Contact" },
 ];
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line/70 bg-bg/70 backdrop-blur-xl">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-on-accent">
+    <header className="sticky top-0 z-50 border-b border-line/70 bg-bg/80 backdrop-blur-xl">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-on-ink">
         Skip to content
       </a>
       <div className="container-x flex h-[68px] items-center justify-between gap-6">
@@ -22,14 +22,14 @@ export function Nav() {
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="rounded-full px-4 py-2 text-sm text-muted transition-colors hover:bg-raised hover:text-fg">
+            <Link key={l.href} href={l.href} className="rounded-lg px-4 py-2 text-sm text-fg transition-colors hover:bg-raised">
               {l.label}
             </Link>
           ))}
         </nav>
         <div className="hidden md:block">
-          <ButtonLink href="/templates" size="sm">
-            Browse templates
+          <ButtonLink href="/hire" size="sm">
+            Hire experts
           </ButtonLink>
         </div>
         <details className="group relative md:hidden">
@@ -38,7 +38,7 @@ export function Nav() {
           </summary>
           <nav aria-label="Mobile" className="card absolute right-0 top-14 flex w-64 flex-col gap-1 p-3">
             {links.map((l) => (
-              <Link key={l.href} href={l.href} className="rounded-xl px-4 py-3 text-base text-fg hover:bg-raised">
+              <Link key={l.href} href={l.href} className="rounded-md px-4 py-3 text-base text-fg hover:bg-raised">
                 {l.label}
               </Link>
             ))}

@@ -81,6 +81,18 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
               <Cover product={product} />
             </div>
           </div>
+          {product.images.length > 1 && (
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2" aria-label={`${product.name} screens`}>
+              {product.images.slice(1).map((src, i) => (
+                <li key={src} className="overflow-hidden rounded-[14px] border border-line bg-raised">
+                  <a href={src} target="_blank" rel="noopener noreferrer" className="block">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={src} alt={`${product.name} screen ${i + 2}`} loading="lazy" className="aspect-[4/3] w-full object-cover object-top transition-transform duration-500 hover:scale-[1.03]" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
           <div className="mt-12 space-y-12">
             <div>
               <h2 className="text-2xl font-semibold">Overview</h2>
@@ -91,8 +103,8 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
                 <h2 className="text-2xl font-semibold">What's inside</h2>
                 <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                   {product.features.map((f) => (
-                    <li key={f} className="flex gap-3 rounded-xl border border-line bg-surface p-4">
-                      <Check aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-accent" />
+                    <li key={f} className="flex gap-3 rounded-md border border-line bg-surface p-4">
+                      <Check aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-link" />
                       <span>{f}</span>
                     </li>
                   ))}
@@ -114,8 +126,8 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
               <Faq
                 items={[
                   { q: "How do I get the file?", a: free ? "The button opens the file in Figma Community. Press “Open in Figma” to duplicate it into your drafts." : "Right after payment, Stripe shows a link to duplicate the file into your own account. The same link is in your receipt email." },
-                  { q: "Can I use it for client projects?", a: <>Yes, on unlimited projects. You can't resell or share the source file. Full terms are on the <Link href="/license" className="text-accent underline underline-offset-4">license page</Link>.</> },
-                  { q: "Can you customise it for me?", a: <>Yes. <Link href={`/hire?product=${product.slug}#enquiry`} className="text-accent underline underline-offset-4">Tell us what you need</Link> and we'll route it to Rayvens or Malik Ali.</> },
+                  { q: "Can I use it for client projects?", a: <>Yes, on unlimited projects. You can't resell or share the source file. Full terms are on the <Link href="/license" className="text-link underline underline-offset-4">license page</Link>.</> },
+                  { q: "Can you customise it for me?", a: <>Yes. <Link href={`/hire?product=${product.slug}#enquiry`} className="text-link underline underline-offset-4">Tell us what you need</Link> and we'll route it to Rayvens or Malik Ali.</> },
                 ]}
               />
             </div>
@@ -130,7 +142,7 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
               ))}
               {product.isNew && <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-on-accent">New</span>}
             </div>
-            <h1 className="mt-4 text-3xl font-semibold leading-tight md:text-4xl">{product.name}</h1>
+            <h1 className="mt-4 text-3xl leading-tight md:text-4xl">{product.name}</h1>
             <p className="mt-2 text-lg text-muted">{product.tagline}</p>
             <p className="mt-6 flex items-baseline gap-3">
               <span className={`text-4xl font-semibold tracking-tight ${free ? "text-success" : ""}`}>{priceLabel(product)}</span>
@@ -142,14 +154,14 @@ async function Detail({ params }: Pick<PageProps<"/templates/[slug]">, "params">
                 {cta} <ArrowRight aria-hidden="true" size={18} />
               </ButtonLink>
               {preview && (
-                <ButtonLink href={`/preview/${product.slug}`} size="lg" variant="secondary" className="w-full">
-                  Live preview
+                <ButtonLink href={`/preview/${product.slug}`} size="lg" variant="ghost" className="w-full">
+                  Preview in Figma
                 </ButtonLink>
               )}
             </div>
             {!free && (
               <p className="mt-4 text-center text-sm text-muted">
-                Or unlock everything with <Link href="/pricing" className="text-accent underline underline-offset-4">All Access</Link>
+                Or unlock everything with <Link href="/pricing" className="text-link underline underline-offset-4">All Access</Link>
               </p>
             )}
             <dl className="mt-6 divide-y divide-line border-t border-line text-sm">

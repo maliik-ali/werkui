@@ -8,7 +8,7 @@ import { TemplateCard } from "./TemplateCard";
 
 const PLATFORMS: Platform[] = ["figma", "framer", "webflow"];
 const chip = (on: boolean) =>
-  `inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition-colors cursor-pointer ${on ? "border-accent bg-accent text-on-accent" : "border-line bg-surface text-muted hover:border-line-input hover:text-fg"}`;
+  `inline-flex min-h-11 items-center rounded-md border px-4 text-sm font-medium transition-colors cursor-pointer ${on ? "border-ink bg-ink text-on-ink" : "border-line bg-surface text-fg hover:border-line-input"}`;
 
 export function CatalogBrowser({ products, lockPrice }: { products: Product[]; lockPrice?: "free" }) {
   const sp = useSearchParams();
@@ -60,12 +60,12 @@ export function CatalogBrowser({ products, lockPrice }: { products: Product[]; l
               value={q}
               onChange={(e) => set("q", e.target.value)}
               placeholder="Search dashboards, landing pages, style guides…"
-              className="h-12 w-full rounded-full border border-line-input bg-bg pl-11 pr-4 text-base placeholder:text-muted/70 focus:border-accent focus:outline-none"
+              className="h-12 w-full rounded-md border border-line-input bg-surface pl-11 pr-4 text-base placeholder:text-muted/70 focus:border-fg focus:outline-none"
             />
           </div>
           <div className="flex items-center gap-2">
             <label htmlFor="catalog-sort" className="text-sm text-muted">Sort</label>
-            <select id="catalog-sort" value={sort} onChange={(e) => set("sort", e.target.value === "new" ? "" : e.target.value)} className="h-12 rounded-full border border-line-input bg-bg px-4 text-sm">
+            <select id="catalog-sort" value={sort} onChange={(e) => set("sort", e.target.value === "new" ? "" : e.target.value)} className="h-12 rounded-md border border-line-input bg-surface px-4 text-sm">
               <option value="new">Newest</option>
               <option value="price-asc">Price: low to high</option>
               <option value="price-desc">Price: high to low</option>
@@ -124,7 +124,7 @@ export function CatalogBrowser({ products, lockPrice }: { products: Product[]; l
               : "No product matches those filters."}{" "}
             Tell us what you need and we'll build it next.
           </p>
-          <Link href="/support?topic=request" className="mt-2 font-medium text-accent underline underline-offset-4">
+          <Link href="/support?topic=request" className="mt-2 font-medium text-link underline underline-offset-4">
             Request a template
           </Link>
         </div>

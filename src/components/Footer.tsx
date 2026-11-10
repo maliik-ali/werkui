@@ -36,10 +36,10 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-line bg-surface/40">
+    <footer className="ink-panel on-ink mt-24">
       <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_2fr]">
         <div className="max-w-sm">
-          <Logo />
+          <Logo className="[&_span]:text-on-ink" />
           <p className="mt-4 leading-relaxed text-muted">
             UI kits and website templates for Figma, Framer and Webflow. Designed by Malik Ali, built by Rayvens.
           </p>
@@ -50,11 +50,11 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {cols.map((c) => (
             <nav key={c.title} aria-label={c.title}>
-              <h2 className="eyebrow mb-4">{c.title}</h2>
+              <h2 className="mb-4 text-sm font-medium text-accent">{c.title}</h2>
               <ul className="space-y-1">
                 {c.links.map(([label, href]) => (
                   <li key={href}>
-                    <Link href={href} className="inline-block py-1.5 text-sm text-muted transition-colors hover:text-fg">
+                    <Link href={href} className="inline-block py-1.5 text-sm text-on-ink/80 transition-colors hover:text-on-ink">
                       {label}
                     </Link>
                   </li>
@@ -64,12 +64,12 @@ export function Footer() {
           ))}
         </div>
       </div>
-      <div className="container-x flex flex-col gap-2 border-t border-line py-6 text-sm text-muted sm:flex-row sm:justify-between">
+      <div className="container-x flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-muted sm:flex-row sm:justify-between">
         <p>© 2026 WerkUI. A Rayvens product.</p>
         <p>
-          <a className="hover:text-fg" href="https://rayvens.com" target="_blank" rel="noopener noreferrer">rayvens.com</a>
+          <a className="hover:text-on-ink" href="https://rayvens.com" target="_blank" rel="noopener noreferrer">rayvens.com</a>
           <span aria-hidden="true"> · </span>
-          <a className="hover:text-fg" href="https://malikali.de" target="_blank" rel="noopener noreferrer">malikali.de</a>
+          <a className="hover:text-on-ink" href="https://malikali.de" target="_blank" rel="noopener noreferrer">malikali.de</a>
         </p>
       </div>
     </footer>
