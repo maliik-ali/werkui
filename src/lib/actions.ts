@@ -31,7 +31,7 @@ export async function submitLead(_prev: FormState, fd: FormData): Promise<FormSt
   const db = supabase();
   if (!db) return { ok: false, message: NOT_CONNECTED };
   const ref = (await cookies()).get("wk_ref")?.value?.slice(0, 40) ?? null;
-  const { error } = await db.from("service_leads").insert({ ...parsed.data, ref });
+  const { error } = await db.from("wk_service_leads").insert({ ...parsed.data, ref });
   if (error) {
     console.error("[lead]", error.message);
     return { ok: false, message: "Something went wrong on our side. Please try again in a minute." };
@@ -45,7 +45,7 @@ export async function subscribe(_prev: FormState, fd: FormData): Promise<FormSta
   if (!email.success) return { ok: false, message: "That email doesn't look right." };
   const db = supabase();
   if (!db) return { ok: false, message: "Sign-ups open shortly. Please check back soon." };
-  const { error } = await db.from("subscribers").insert({ email: email.data.toLowerCase(), source: String(fd.get("source") ?? "site").slice(0, 60) });
+  const { error } = await db.from("wk_subscribers").insert({ email: email.data.toLowerCase(), source: String(fd.get("source") ?? "site").slice(0, 60) });
   if (error && error.code !== "23505") {
     console.error("[subscribe]", error.message);
     return { ok: false, message: "Something went wrong. Please try again." };

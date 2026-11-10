@@ -47,7 +47,7 @@ export async function GET(req: NextRequest, ctx: RouteContext<"/go/[slug]">) {
 
   const db = supabase();
   if (db && target) {
-    const { error } = await db.from("checkout_clicks").insert({ product_slug: productSlug, plan_slug: planSlug, ref });
+    const { error } = await db.from("wk_checkout_clicks").insert({ product_slug: productSlug, plan_slug: planSlug, ref });
     if (error) console.error("[go]", error.message);
   }
   return NextResponse.redirect(target ?? fallback, 302);

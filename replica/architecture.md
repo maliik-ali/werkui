@@ -9,7 +9,7 @@ Reads `recon.md` and `features.csv`. Decisions from Malik (2026-11-09): new Supa
 | web app | Next.js (App Router) + TypeScript | Vercel-native, server-rendered catalog pages for SEO, one codebase for site and API |
 | styling | Tailwind CSS v4, tokens as CSS variables in `src/styles/tokens.css` | same token names as the Figma variables, so Figma -> code stays one-to-one |
 | motion | CSS + one canvas component, `motion` for scroll reveals | original animated backgrounds, no licensed video; respects reduced motion |
-| database | Postgres on Supabase (new project, Rayvens org) | Malik already uses it; auth and storage are there when phase 2 needs them |
+| database | Postgres on Supabase, project "content" (shared with malik-ali.com), all WerkUI tables prefixed `wk_` | Malik already uses it; auth and storage are there when phase 2 needs them |
 | data access | `@supabase/supabase-js` with the publishable key, server-side, cached (ISR 5 min) | catalog is public read; RLS does the gatekeeping |
 | payments | Stripe payment links stored per product / plan | Malik's choice; no API keys in the app; Stripe's confirmation page hands over the file URL |
 | email | none in v1 (Stripe sends receipts) | Resend in phase 2 |

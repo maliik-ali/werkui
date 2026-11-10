@@ -8,10 +8,10 @@ import type { Plan, Product, Seller } from "./types";
 function toProduct(r: any): Product {
   return {
     slug: r.slug,
-    sellerHandle: r.sellers?.handle ?? "malik-ali",
+    sellerHandle: r.seller?.handle ?? "malik-ali",
     kind: r.kind,
-    category: r.categories?.name ?? "Other",
-    categorySlug: r.categories?.slug ?? "other",
+    category: r.category?.name ?? "Other",
+    categorySlug: r.category?.slug ?? "other",
     name: r.name,
     tagline: r.tagline,
     description: r.description,
@@ -29,7 +29,7 @@ function toProduct(r: any): Product {
     isNew: r.is_new,
     isFeatured: r.is_featured,
     publishedAt: r.published_at ?? r.created_at,
-    variants: (r.product_variants ?? []).map((v: any) => ({
+    variants: (r.variants ?? []).map((v: any) => ({
       platform: v.platform,
       previewUrl: v.preview_url,
       freeAccessUrl: v.free_access_url,
@@ -44,8 +44,8 @@ export async function getProducts(): Promise<Product[]> {
   const db = supabase();
   if (db) {
     const { data, error } = await db
-      .from("products")
-      .select("*, sellers(handle), categories(name, slug), product_variants(platform, preview_url, free_access_url)")
+      .from("wk_products")
+      .select("*, seller:wk_sellers(handle), category:wk_categories(name, slug), variants:wk_product_variants(platform, preview_url, free_access_url)")
       .eq("status", "published")
       .order("published_at", { ascending: false });
     if (!error && data && data.length) return data.map(toProduct);
@@ -65,7 +65,7 @@ export async function getSellers(): Promise<Seller[]> {
   cacheTag("catalog");
   const db = supabase();
   if (db) {
-    const { data, error } = await db.from("sellers").select("*").order("created_at");
+    const { data, error } = await db.from("wk_sellers").select("*").order("created_at");
     if (!error && data && data.length)
       return data.map((r: any) => ({
         handle: r.handle,
@@ -75,7 +75,7 @@ export async function getSellers(): Promise<Seller[]> {
         websiteUrl: r.website_url ?? "",
         links: r.links ?? {},
         isVerified: r.is_verified,
-        hue: r.links?.hue ?? 258,
+        hue: r.hue ?? 258,
       }));
     if (error) console.error("[data] sellers:", error.message);
   }
@@ -93,7 +93,7 @@ export async function getPlans(): Promise<Plan[]> {
   cacheTag("catalog");
   const db = supabase();
   if (db) {
-    const { data, error } = await db.from("plans").select("*").eq("status", "published").order("position");
+    const { data, error } = await db.from("wk_plans").select("*").eq("status", "published").order("position");
     if (!error && data && data.length)
       return data.map((r: any) => ({
         slug: r.slug,
