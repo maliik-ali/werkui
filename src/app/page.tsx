@@ -10,17 +10,16 @@ import { Stories, type Story } from "@/components/Stories";
 import { TemplateCard } from "@/components/TemplateCard";
 import { getPlans, getProducts } from "@/lib/data";
 
-/** Real client quote, from malikali.de. Add more here as they come in; never invent one. */
-const stories: Story[] = [
-  {
-    headline: "Hired twice. Still the favourite designer.",
-    quote: "I am surprised by his speed: I have no idea how someone can come up with so many good ideas in such a short amount of time.",
-    name: "Andreas",
-    role: "Founder, Mathebibel · client of Malik Ali",
-    image: "https://cdn.prod.website-files.com/663c3bbe86810f1ed24353d9/665181243f14d4ff3f5d0527_2.webp",
-    imageAlt: "A dashboard screen from the Shopzy UI kit",
-  },
-];
+/** The one real client quote, from malikali.de. Add more here as they come in; never invent one. */
+const clientStory: Story = {
+  id: "andreas",
+  kind: "quote",
+  headline: "Hired twice. Still the favourite designer.",
+  body: "I am surprised by his speed: I have no idea how someone can come up with so many good ideas in such a short amount of time.",
+  tags: ["Andreas", "Founder, Mathebibel · client of Malik Ali"],
+  image: "https://cdn.prod.website-files.com/663c3bbe86810f1ed24353d9/665181243f14d4ff3f5d0527_2.webp",
+  imageAlt: "A dashboard screen from the Shopzy UI kit",
+};
 
 const platforms = [
   { label: "Webflow", short: "Wf", cls: "bg-accent text-on-accent" },
@@ -55,18 +54,42 @@ export default async function Home() {
   const featured = products.filter((p) => p.isFeatured).slice(0, 3);
   const free = products.filter((p) => p.priceCents === 0).slice(0, 3);
   const loop = [...products, ...products];
+  // Slides after the client quote are product spotlights (facts from the catalog, not reviews).
+  const stories: Story[] = [
+    clientStory,
+    ...products
+      .filter((p) => p.coverUrl)
+      .slice(0, 5)
+      .map((p) => ({
+        id: p.slug,
+        kind: "product" as const,
+        headline: `${p.name}: ${p.tagline}`,
+        body: p.description,
+        tags: [p.category, p.priceCents === 0 ? "Free" : p.priceCents === null ? "Coming soon" : `$${p.priceCents / 100}`],
+        image: p.images[1] ?? p.coverUrl!,
+        imageAlt: `A screen from ${p.name}`,
+        href: `/templates/${p.slug}`,
+      })),
+  ];
 
   return (
     <>
       <section className="relative isolate overflow-hidden">
         <Backdrop />
         <div className="container-x relative pb-12 pt-20 text-center md:pt-28">
-          <h1 className="reveal mx-auto max-w-5xl text-[44px] font-normal leading-[1.08] sm:text-6xl md:text-[88px]">
+          <h1 className="mx-auto max-w-5xl text-[44px] font-normal leading-[1.08] sm:text-6xl md:text-[88px]">
             <span className="inline-flex flex-wrap items-center justify-center gap-x-5">
-              Built to launch
+              <span>
+                {["Built", "to", "launch"].map((w, i) => (
+                  <span key={w} className="word" style={{ "--i": i } as React.CSSProperties}>
+                    {w}
+                    {i < 2 && "\u00a0"}
+                  </span>
+                ))}
+              </span>
               <span className="inline-flex -space-x-3 align-middle" role="img" aria-label="Works with Webflow, Framer and Figma">
-                {platforms.map((p) => (
-                  <span key={p.label} title={p.label} className={`grid size-12 place-items-center rounded-full border-2 border-surface text-sm font-semibold tracking-normal shadow-card md:size-[72px] md:text-xl ${p.cls}`}>
+                {platforms.map((p, i) => (
+                  <span key={p.label} title={p.label} style={{ "--i": i } as React.CSSProperties} className={`pop grid size-12 place-items-center rounded-full border-2 border-surface text-sm font-semibold tracking-normal shadow-card md:size-[72px] md:text-xl ${p.cls}`}>
                     {p.short}
                   </span>
                 ))}
@@ -75,14 +98,18 @@ export default async function Home() {
             <br />
             <span className="relative inline-block">
               <Cursor className="-left-9 top-1 hidden -scale-x-100 md:block" />
-              <span className="selected"><i /><i />Designed</span> to sell
+              <span className="word" style={{ "--i": 3 } as React.CSSProperties}>
+                <span className="selected draw"><i /><i />Designed</span>
+              </span>{" "}
+              <span className="word" style={{ "--i": 4 } as React.CSSProperties}>to&nbsp;</span>
+              <span className="word" style={{ "--i": 5 } as React.CSSProperties}>sell</span>
             </span>
           </h1>
-          <p className="reveal mx-auto mt-8 max-w-xl leading-relaxed text-muted-foreground md:text-lg" style={{ "--d": "120ms" } as React.CSSProperties}>
+          <p className="rise mx-auto mt-8 max-w-xl leading-relaxed text-muted-foreground md:text-lg" style={{ "--d": "900ms" } as React.CSSProperties}>
             UI kits, dashboards and website templates by a senior product designer. Preview the real file, buy once,
             and make it yours.
           </p>
-          <div className="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ "--d": "200ms" } as React.CSSProperties}>
+          <div className="rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ "--d": "1050ms" } as React.CSSProperties}>
             <ButtonLink href="/templates" size="lg">
               Browse templates <LayoutPanelLeft aria-hidden="true" size={18} />
             </ButtonLink>
@@ -92,7 +119,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="container-x relative pb-16">
-        <div className="marquee-wrap ink-panel on-ink reveal relative overflow-hidden rounded-[28px] py-6 shadow-[0_30px_80px_rgba(7,26,49,0.25)]" style={{ "--d": "320ms" } as React.CSSProperties}>
+        <div className="marquee-wrap ink-panel on-ink rise relative overflow-hidden rounded-[28px] py-6 shadow-[0_30px_80px_rgba(7,26,49,0.25)]" style={{ "--d": "1250ms" } as React.CSSProperties}>
           <ul className="marquee" aria-label="Featured products">
             {loop.map((p, i) => (
               <li key={`${p.slug}-${i}`} aria-hidden={i >= products.length} className="w-[300px] shrink-0 md:w-[380px]">
@@ -200,11 +227,11 @@ export default async function Home() {
       <section className="stories-bg on-ink py-20 text-on-ink md:py-28">
         <div className="container-x">
           <div className="reveal mx-auto mb-12 max-w-2xl text-center">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em]">Client stories</p>
-            <h2 className="text-4xl leading-[1.05] md:text-6xl">Real clients. Real words.</h2>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em]">Stories</p>
+            <h2 className="text-4xl leading-[1.05] md:text-6xl">Real work. Real words.</h2>
           </div>
           <div className="reveal">
-            <Stories stories={stories} tiles={products.map((p) => p.coverUrl).filter((u): u is string => Boolean(u)).slice(2, 6)} />
+            <Stories stories={stories} />
           </div>
         </div>
       </section>
@@ -231,7 +258,7 @@ export default async function Home() {
             Stop redrawing
             <br />
             <span className="relative inline-block">
-              Start <span className="selected"><i /><i />shipping</span>
+              Start <span className="selected draw"><i /><i />shipping</span>
               <Cursor className="-bottom-5 -right-7 hidden md:block" />
             </span>
           </h2>

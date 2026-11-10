@@ -75,8 +75,8 @@ p { text-wrap: pretty; }
 @keyframes drift-b { to { transform: translate3d(-16vw, 10vw, 0) scale(0.9); } }
 @keyframes drift-c { to { transform: translate3d(-10vw, -6vw, 0) scale(1.3); } }
 /* Diagonal light beams sweeping slowly across the hero */
-.grid-floor { position: absolute; inset: -20% -10%; background: repeating-linear-gradient(115deg, transparent 0 9%, rgba(255,255,255,0.55) 12% 16%, transparent 19% 30%); animation: beams 14s ease-in-out infinite alternate; pointer-events: none; mask-image: linear-gradient(to bottom, #000 30%, transparent 85%); -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 85%); }
-@keyframes beams { from { transform: translateX(-4%); } to { transform: translateX(4%); } }
+.grid-floor { position: absolute; inset: -20% -10%; background: repeating-linear-gradient(115deg, transparent 0 9%, rgba(255,255,255,0.8) 12% 16%, transparent 19% 30%); animation: beams 9s ease-in-out infinite alternate; pointer-events: none; mask-image: linear-gradient(to bottom, #000 30%, transparent 85%); -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 85%); }
+@keyframes beams { from { transform: translateX(-9%); } to { transform: translateX(9%); } }
 
 .noise { position: absolute; inset: 0; pointer-events: none; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
@@ -104,7 +104,7 @@ details[open] .chev { transform: rotate(45deg); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .aurora i, .grid-floor, .marquee, .float, .wall, .cursor-nudge { animation: none !important; }
+  .aurora i, .grid-floor, .marquee, .float, .wall, .cursor-nudge, .word, .pop, .rise, .selected.draw, .selected.draw::before, .selected.draw::after, .selected.draw > i, .story-in-right, .story-in-left, .story-tile { animation: none !important; }
   .reveal { opacity: 1; transform: none; transition: none; }
   * { transition-duration: 0.01ms !important; }
 }
@@ -118,10 +118,39 @@ details[open] .chev { transform: rotate(45deg); }
 .selected > i:first-of-type { right: -4px; top: -4px; }
 .selected > i:last-of-type { left: -4px; bottom: -4px; }
 @keyframes nudge { 50% { transform: translate(6px, 5px); } }
-.cursor-nudge { animation: nudge 3.2s ease-in-out infinite; }
+@keyframes cursor-in { from { opacity: 0; translate: 160px 110px; } to { opacity: 1; translate: 0 0; } }
+.cursor-nudge { animation: cursor-in 0.9s 0.9s var(--motion-ease) both, nudge 3.2s 2s ease-in-out infinite; }
+
+/* Hero entrance: words rise out of a blur, platform chips pop, the selection box draws itself */
+@keyframes word-in { from { opacity: 0; filter: blur(12px); transform: translateY(0.45em); } to { opacity: 1; filter: blur(0); transform: none; } }
+.word { display: inline-block; animation: word-in 0.9s var(--motion-ease) both; animation-delay: calc(var(--i, 0) * 110ms + 100ms); }
+@keyframes pop-in { 0% { opacity: 0; transform: scale(0.3) rotate(-20deg); } 70% { transform: scale(1.12) rotate(4deg); } 100% { opacity: 1; transform: none; } }
+.pop { animation: pop-in 0.6s cubic-bezier(0.2, 1.3, 0.4, 1) both; animation-delay: calc(var(--i, 0) * 120ms + 700ms); }
+.pop:hover { transform: translateY(-6px) scale(1.06); transition: transform var(--motion-base) var(--motion-ease); }
+@keyframes select-in { from { color: var(--color-text); background: transparent; outline-color: transparent; } to { color: #7c8799; background: rgba(255,255,255,0.75); outline-color: #9aa5b5; } }
+@keyframes handle-in { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+.selected.draw { animation: select-in 0.5s 1.7s ease-out both; }
+.selected.draw::before, .selected.draw::after, .selected.draw > i { animation: handle-in 0.3s 1.9s ease-out both; }
+@keyframes rise-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise-in 0.9s var(--motion-ease) both; animation-delay: var(--d, 0ms); }
+/* same drawing effect further down the page, started when the block scrolls into view */
+.reveal .selected.draw, .reveal .selected.draw::before, .reveal .selected.draw::after, .reveal .selected.draw > i, .reveal .cursor-nudge { animation-play-state: paused; }
+.reveal.in .selected.draw, .reveal.in .selected.draw::before, .reveal.in .selected.draw::after, .reveal.in .selected.draw > i, .reveal.in .cursor-nudge { animation-play-state: running; }
+
+/* Stories carousel */
+@keyframes story-right { from { opacity: 0; transform: translateX(48px) scale(0.98); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes story-left { from { opacity: 0; transform: translateX(-48px) scale(0.98); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+.story-in-right { animation: story-right 0.6s var(--motion-ease) both; }
+.story-in-left { animation: story-left 0.6s var(--motion-ease) both; }
+@keyframes tile-in { from { opacity: 0; transform: scale(1.15); } to { opacity: 1; transform: none; } }
+.story-tile { animation: tile-in 0.6s var(--motion-ease) both; }
+@keyframes progress { from { width: 0; } to { width: 100%; } }
+.story-progress { animation: progress linear both; }
 /* Stories section wash */
 .stories-bg { background: linear-gradient(160deg, #2f5fa8 0%, #4f86d6 28%, #8f9be6 55%, #d9a7e6 74%, #f6e3d3 100%); }
 /* Tilted wall of screens behind the closing call to action */
 .wall { position: absolute; inset: -30% -20%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; transform: rotate(-24deg); opacity: 0.2; filter: saturate(0.5); pointer-events: none; animation: wall-drift 40s linear infinite alternate; }
 .wall img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 24px; }
 @keyframes wall-drift { to { transform: rotate(-24deg) translateY(-6%); } }
+/* white cards placed on dark or gradient sections keep the normal muted text colour */
+.on-ink .bg-card .text-muted-foreground { color: var(--color-text-muted); }
