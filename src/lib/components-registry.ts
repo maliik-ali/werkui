@@ -7,6 +7,7 @@ import BentoGridDemo from "@/registry/werkui/examples/bento-grid-demo";
 import HeroSectionDemo from "@/registry/werkui/examples/hero-section-demo";
 import NavbarDemo from "@/registry/werkui/examples/navbar-demo";
 import PricingCardsDemo from "@/registry/werkui/examples/pricing-cards-demo";
+import StatCardDemo from "@/registry/werkui/examples/stat-card-demo";
 import TestimonialsMarqueeDemo from "@/registry/werkui/examples/testimonials-marquee-demo";
 
 export type PropDoc = { name: string; type: string; default?: string; description: string };
@@ -15,7 +16,7 @@ export type RegistryComponent = {
   slug: string;
   title: string;
   description: string;
-  category: "Buttons" | "Text" | "Layout" | "Sections";
+  category: "Buttons" | "Text" | "Layout" | "Sections" | "Dashboard";
   /** Path of the component source, relative to the project root. */
   file: string;
   Demo: ComponentType;
@@ -31,6 +32,22 @@ export type RegistryComponent = {
 const f = (slug: string) => `src/registry/werkui/${slug}.tsx`;
 
 export const components: RegistryComponent[] = [
+  {
+    slug: "stat-card",
+    title: "Stat Card",
+    description: "A dashboard metric with a label, a large value, a caption and an optional progress ring. Group several in one card.",
+    category: "Dashboard",
+    file: f("stat-card"),
+    Demo: StatCardDemo,
+    isNew: true,
+    props: [
+      { name: "label", type: "string", description: "Short name of the metric." },
+      { name: "value", type: "ReactNode", description: "The headline number." },
+      { name: "caption", type: "ReactNode", description: "Small line under the value, for example the period." },
+      { name: "progress", type: "number", description: "0 to 100. Shows a progress ring on the right when set." },
+      { name: "StatCardGroup", type: "component", description: "Card surface that spaces several StatCards in a row." },
+    ],
+  },
   {
     slug: "navbar",
     title: "Navbar",

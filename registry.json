@@ -179,6 +179,18 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat Card",
+      "description": "A dashboard metric with a label, a large value, a caption and an optional progress ring.",
+      "files": [
+        {
+          "path": "src/registry/werkui/stat-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,11 @@
 import { DocsNav, type DocsNavSection } from "@/components/site/docs-nav";
 import { components } from "@/lib/components-registry";
 
+const navItems = (list: typeof components) =>
+  [...list]
+    .sort((a, b) => a.title.localeCompare(b.title))
+    .map((c) => ({ title: c.title, href: `/docs/components/${c.slug}`, isNew: c.isNew }));
+
 const sections: DocsNavSection[] = [
   {
     title: "Getting Started",
@@ -13,10 +18,12 @@ const sections: DocsNavSection[] = [
     title: "Components",
     items: [
       { title: "All components", href: "/docs/components" },
-      ...[...components]
-        .sort((a, b) => a.title.localeCompare(b.title))
-        .map((c) => ({ title: c.title, href: `/docs/components/${c.slug}`, isNew: c.isNew })),
+      ...navItems(components.filter((c) => c.category !== "Dashboard")),
     ],
+  },
+  {
+    title: "Dashboard",
+    items: navItems(components.filter((c) => c.category === "Dashboard")),
   },
 ];
 

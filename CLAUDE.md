@@ -74,7 +74,8 @@ Everything here is open source (see `THIRD-PARTY.md`). Keep the dependency footp
 
 ## Roadmap
 
-Built: navbar, pricing-cards, testimonials-marquee, hero-section, bento-grid, marquee, shimmer-button, announcement-banner, gradient-text.
+Dashboard category (free, from the owner's Shopzy Figma, file Ii4TBkoG5IDPaKY59QgoGK, Dashboard 1 = node 2232:31253): built stat-card. Next pieces from that frame: revenue bar chart card, donut chart card, customer/product list cards, sidebar, topbar. A chart library (recharts) needs a THIRD-PARTY.md entry. The finished Shopzy template is the paid product. The Elegant kit (FRsKFOgDgn4W0q7EPcNm4k) is also the owner's.
+Built: stat-card, navbar, pricing-cards, testimonials-marquee, hero-section, bento-grid, marquee, shimmer-button, announcement-banner, gradient-text.
 Next, in order: faq-accordion, logo-cloud, stats-counter, cta-section, footer, feature-section, animated-beam or similar background effect. Then a first free template assembled from them.
 
 ## Website

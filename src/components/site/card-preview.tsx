@@ -3,7 +3,7 @@ import type { RegistryComponent } from "@/lib/components-registry";
 
 /** Non-interactive thumbnail of a component demo. Wide demos are rendered at desktop width and scaled down. */
 export function CardPreview({ component: c, className }: { component: RegistryComponent; className?: string }) {
-  const wide = c.category === "Sections" || c.category === "Layout";
+  const wide = c.category === "Sections" || c.category === "Layout" || c.category === "Dashboard";
   return (
     <div
       inert
