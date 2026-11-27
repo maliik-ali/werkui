@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonials-marquee",
+  "title": "Testimonials Marquee",
+  "description": "Rows of testimonial cards that scroll in opposite directions and pause on hover.",
+  "registryDependencies": [
+    "https://www.werkui.com/r/marquee.json"
+  ],
+  "files": [
+    {
+      "path": "src/registry/werkui/testimonials-marquee.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { Marquee } from \"@/components/ui/marquee\";\n\nexport interface Testimonial {\n  name: string;\n  /** Handle or company, shown under the name. */\n  handle?: string;\n  quote: string;\n  /** Image URL. Initials are shown when omitted. */\n  avatar?: string;\n}\n\nexport interface TestimonialsMarqueeProps extends React.ComponentProps<\"div\"> {\n  testimonials: Testimonial[];\n  /** Number of scrolling rows. Rows alternate direction. */\n  rows?: number;\n  /** Time for one loop, e.g. \"40s\". */\n  duration?: string;\n}\n\nfunction initials(name: string) {\n  return name\n    .split(\" \")\n    .map((part) => part[0])\n    .join(\"\")\n    .slice(0, 2)\n    .toUpperCase();\n}\n\nfunction TestimonialCard({ name, handle, quote, avatar }: Testimonial) {\n  return (\n    <figure className=\"w-72 shrink-0 rounded-xl border bg-card p-4\">\n      <figcaption className=\"flex items-center gap-3\">\n        {avatar ? (\n          // eslint-disable-next-line @next/next/no-img-element\n          <img src={avatar} alt=\"\" loading=\"lazy\" className=\"size-9 rounded-full object-cover\" />\n        ) : (\n          <span className=\"grid size-9 place-items-center rounded-full bg-accent text-xs font-medium text-accent-foreground\">\n            {initials(name)}\n          </span>\n        )}\n        <div className=\"min-w-0 leading-tight\">\n          <p className=\"truncate text-sm font-medium\">{name}</p>\n          {handle && <p className=\"truncate text-xs text-muted-foreground\">{handle}</p>}\n        </div>\n      </figcaption>\n      <blockquote className=\"mt-3 text-sm text-muted-foreground\">{quote}</blockquote>\n    </figure>\n  );\n}\n\nexport function TestimonialsMarquee({\n  testimonials,\n  rows = 2,\n  duration = \"40s\",\n  className,\n  style,\n  ...props\n}: TestimonialsMarqueeProps) {\n  const lanes = Array.from({ length: rows }, (_, row) => testimonials.filter((_, i) => i % rows === row));\n\n  return (\n    <div\n      className={cn(\"relative flex w-full flex-col overflow-hidden\", className)}\n      style={{ \"--duration\": duration, ...style } as React.CSSProperties}\n      {...props}\n    >\n      {lanes.map((lane, row) => (\n        <Marquee key={row} reverse={row % 2 === 1} pauseOnHover>\n          {lane.map((t) => (\n            <TestimonialCard key={t.name + t.quote} {...t} />\n          ))}\n        </Marquee>\n      ))}\n      <div aria-hidden className=\"pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-background\" />\n      <div aria-hidden className=\"pointer-events-none absolute inset-y-0 right-0 w-1/5 bg-gradient-to-l from-background\" />\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

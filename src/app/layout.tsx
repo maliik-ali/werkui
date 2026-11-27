@@ -1,38 +1,31 @@
-import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Effects } from "@/components/Effects";
-import { Footer } from "@/components/Footer";
-import { Nav } from "@/components/Nav";
-import { SITE_URL } from "@/lib/format";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "next-themes";
+import { AnnouncementBar } from "@/components/site/announcement-bar";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
+import { site } from "@/lib/site";
 import "./globals.css";
 
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: { default: "WerkUI: UI kits and templates for Figma, Framer and Webflow", template: "%s | WerkUI" },
-  description:
-    "Premium and free UI kits, dashboards and website templates for Figma, Framer and Webflow. Preview, buy once, start building today.",
-  openGraph: { siteName: "WerkUI", type: "website", url: SITE_URL },
-  twitter: { card: "summary_large_image" },
+  metadataBase: new URL(site.url),
+  title: { default: `${site.name}: ${site.tagline}`, template: `%s | ${site.name}` },
+  description: site.description,
 };
 
-export const viewport: Viewport = { themeColor: "#fcfbf8", colorScheme: "light" };
-
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}>
-      <head>
-        <noscript>
-          <style>{".reveal{opacity:1!important;transform:none!important}"}</style>
-        </noscript>
-      </head>
-      <body className="flex min-h-dvh flex-col overflow-x-clip">
-        <Nav />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <Effects />
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
+      <body className="flex min-h-full flex-col">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AnnouncementBar />
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

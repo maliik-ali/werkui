@@ -1,0 +1,178 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "werkui",
+  "homepage": "https://www.werkui.com",
+  "items": [
+    {
+      "name": "shimmer-button",
+      "type": "registry:ui",
+      "title": "Shimmer Button",
+      "description": "A primary call-to-action button with a looping light sweep.",
+      "files": [
+        {
+          "path": "src/registry/werkui/shimmer-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "css": {
+        "@theme inline": {
+          "--animate-shimmer": "shimmer 2.5s linear infinite"
+        },
+        "@keyframes shimmer": {
+          "from": {
+            "transform": "translateX(-100%)"
+          },
+          "to": {
+            "transform": "translateX(100%)"
+          }
+        }
+      }
+    },
+    {
+      "name": "announcement-banner",
+      "type": "registry:ui",
+      "title": "Announcement Banner",
+      "description": "A pill-shaped link with a badge, used above hero headlines.",
+      "files": [
+        {
+          "path": "src/registry/werkui/announcement-banner.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:ui",
+      "title": "Gradient Text",
+      "description": "Inline text with a slowly moving gradient.",
+      "files": [
+        {
+          "path": "src/registry/werkui/gradient-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "css": {
+        "@theme inline": {
+          "--animate-gradient": "gradient 8s linear infinite"
+        },
+        "@keyframes gradient": {
+          "to": {
+            "background-position": "var(--bg-size, 300%) 0"
+          }
+        }
+      }
+    },
+    {
+      "name": "marquee",
+      "type": "registry:ui",
+      "title": "Marquee",
+      "description": "An infinite, CSS-only scrolling track for logos, testimonials or badges.",
+      "files": [
+        {
+          "path": "src/registry/werkui/marquee.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "css": {
+        "@theme inline": {
+          "--animate-marquee": "marquee var(--duration, 40s) linear infinite",
+          "--animate-marquee-vertical": "marquee-vertical var(--duration, 40s) linear infinite"
+        },
+        "@keyframes marquee": {
+          "from": {
+            "transform": "translateX(0)"
+          },
+          "to": {
+            "transform": "translateX(calc(-100% - var(--gap, 1rem)))"
+          }
+        },
+        "@keyframes marquee-vertical": {
+          "from": {
+            "transform": "translateY(0)"
+          },
+          "to": {
+            "transform": "translateY(calc(-100% - var(--gap, 1rem)))"
+          }
+        }
+      }
+    },
+    {
+      "name": "bento-grid",
+      "type": "registry:component",
+      "title": "Bento Grid",
+      "description": "A responsive bento layout of feature cards with hover reveal and a background slot.",
+      "files": [
+        {
+          "path": "src/registry/werkui/bento-grid.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "hero-section",
+      "type": "registry:component",
+      "title": "Hero Section",
+      "description": "A staggered-reveal hero with announcement, headline, copy, actions and optional media.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/registry/werkui/hero-section.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "navbar",
+      "type": "registry:component",
+      "title": "Navbar",
+      "description": "A sticky navigation bar with a blurred background on scroll and an accessible mobile menu.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/registry/werkui/navbar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pricing-cards",
+      "type": "registry:component",
+      "title": "Pricing Cards",
+      "description": "Pricing plans with a monthly and yearly toggle and a highlighted featured plan.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/registry/werkui/pricing-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-marquee",
+      "type": "registry:component",
+      "title": "Testimonials Marquee",
+      "description": "Rows of testimonial cards that scroll in opposite directions and pause on hover.",
+      "registryDependencies": [
+        "https://www.werkui.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/werkui/testimonials-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

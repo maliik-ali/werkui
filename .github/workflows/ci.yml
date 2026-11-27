@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Registry is up to date
+        run: |
+          npm run registry:build
+          if [ -n "$(git status --porcelain -- public/r)" ]; then
+            git status --short -- public/r
+            echo "public/r is out of date. Run 'npm run registry:build' and commit the result."
+            exit 1
+          fi
+
+      - name: Build
+        run: npm run build

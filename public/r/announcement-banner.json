@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "announcement-banner",
+  "title": "Announcement Banner",
+  "description": "A pill-shaped link with a badge, used above hero headlines.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "src/registry/werkui/announcement-banner.tsx",
+      "content": "import * as React from \"react\";\nimport { ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AnnouncementBannerProps extends React.ComponentProps<\"a\"> {\n  /** Short highlighted label, e.g. \"New\". */\n  badge?: string;\n}\n\nexport function AnnouncementBanner({\n  badge = \"New\",\n  href = \"#\",\n  className,\n  children,\n  ...props\n}: AnnouncementBannerProps) {\n  return (\n    <a\n      href={href}\n      className={cn(\n        \"group inline-flex items-center gap-2 rounded-full border bg-card py-1 pl-1 pr-3 text-sm text-muted-foreground shadow-xs transition-colors hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <span className=\"rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-primary-foreground\">\n        {badge}\n      </span>\n      <span>{children}</span>\n      <ArrowRight className=\"size-3.5 transition-transform group-hover:translate-x-0.5\" />\n    </a>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

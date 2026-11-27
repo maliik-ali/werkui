@@ -1,33 +1,71 @@
 # WerkUI
 
-Marketplace for UI kits and templates (Figma, Framer, Webflow). Next.js App Router + Tailwind v4, deployed on Vercel at werkui.com.
+Copy-paste React components for SaaS and agency landing pages. Built with Tailwind CSS v4, Motion and shadcn/ui. Free and open source (MIT).
 
-## Run
+Website: https://www.werkui.com
+
+## Use a component
+
+WerkUI is distributed through the shadcn registry. In a project that already uses shadcn/ui:
+
+```bash
+npx shadcn@latest add https://www.werkui.com/r/shimmer-button.json
+```
+
+The source is copied into your project, so you own it and can edit anything.
+
+## Components
+
+| Component | Slug |
+|---|---|
+| Navbar | `navbar` |
+| Pricing Cards | `pricing-cards` |
+| Testimonials Marquee | `testimonials-marquee` |
+| Hero Section | `hero-section` |
+| Bento Grid | `bento-grid` |
+| Marquee | `marquee` |
+| Shimmer Button | `shimmer-button` |
+| Announcement Banner | `announcement-banner` |
+| Gradient Text | `gradient-text` |
+
+## Develop this repo
 
 ```bash
 npm install
-npm run dev
+npm run dev          # docs site at http://localhost:3000
+npm run registry:build   # regenerates public/r/*.json from registry.json
+npm run lint && npm run typecheck && npm run build   # what CI runs
 ```
 
-## Where things are
+### How it fits together
 
-| what | where |
-| --- | --- |
-| Design tokens (source of truth) | `replica/design/tokens.json` -> `src/styles/tokens.css` -> Figma variables in the WerkUI file |
-| Catalog (until Supabase is connected) | `src/data/seed.ts` |
-| Database | Supabase project "content" (shared with malik-ali.com). WerkUI tables are all prefixed `wk_`; schema in `replica/schema.sql` |
-| Recon, architecture, feature matrix | `replica/` |
-| Checkout hand-off | `src/app/go/[slug]/route.ts` (redirects to the Stripe payment link stored on the product or plan) |
-| Partner feed for malikali.de / rayvens.com | `GET /api/products` (link back with `?ref=malikali` or `?ref=rayvens`) |
+- `src/registry/werkui/` holds each component, with a demo in `examples/`.
+- `registry.json` lists the installable items. Run `npm run registry:build` after changing a component or its entry.
+- `src/lib/components-registry.ts` drives the docs pages (title, props, demo).
+- `src/app/` is the website: landing page and a docs area (`/docs`, `/docs/installation`, `/docs/components`, `/docs/components/[slug]`).
 
-## UI components
+### Add a component
 
-Built on shadcn/ui (new-york style, Radix). Source lives in `src/components/ui/` and is themed through the WerkUI tokens in `src/app/globals.css` (`--color-primary` = ink, `--color-secondary` = accent blue, and so on). The shadcn registry is configured in `components.json`, so `npx shadcn@latest add <component>` works for new ones.
+1. Create `src/registry/werkui/<name>.tsx` and `examples/<name>-demo.tsx`.
+2. Add an entry to `registry.json` (include `dependencies` and any `css` keyframes).
+3. Add it to `src/lib/components-registry.ts`.
+4. Run `npm run registry:build`, `npm run lint` and `npm run build`.
 
-## Adding a product
+## Dependencies and licenses
 
-Add an entry to `src/data/seed.ts` (or, now that Supabase is connected, a row in `wk_products` + `wk_product_variants` in the Supabase table editor; the site picks it up within a few minutes): name, price in cents (`0` = free, `null` = coming soon), `paymentUrl` (Stripe payment link), `previewUrl`, and for free products `freeAccessUrl`.
+WerkUI is MIT. It builds on open-source projects, and the goal is to stay easy to move off any one of them.
 
-## Adding a page from Figma
+- **Users get very little.** A component needs React, Tailwind v4, the `cn()` helper that `shadcn init` creates, and sometimes `lucide-react` or `motion`. There is no WerkUI runtime package.
+- **The registry is ours.** The JSON files are hosted at `werkui.com/r/`, not on shadcn's servers. Every component can also be installed by copying its file from this repo.
+- **Versions are pinned.** `package-lock.json` is committed, and Dependabot opens a weekly pull request that must pass CI before an upgrade lands.
+- **Keep it small.** Adding a dependency to a component needs a reason. Prefer plain CSS and the tokens in `globals.css`.
 
-Design it in the WerkUI Figma file using the `color/*`, `radius/*` and `space/*` variables. They share names with the CSS variables in `src/styles/tokens.css`, so generated code maps straight onto the existing utilities (`bg-surface`, `text-muted`, `border-line`, `bg-accent`).
+The full list with versions and licenses is in [THIRD-PARTY.md](./THIRD-PARTY.md). WerkUI is not affiliated with shadcn/ui, Vercel, Tailwind Labs or Magic UI.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every push to `main` and every pull request: lint, type check, a check that `public/r` is up to date with `registry.json`, and a production build.
+
+## License
+
+MIT. See [LICENSE](./LICENSE).

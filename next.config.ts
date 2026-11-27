@@ -3,6 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
+  async redirects() {
+    return [
+      { source: "/components", destination: "/docs/components", permanent: true },
+      { source: "/components/:slug", destination: "/docs/components/:slug", permanent: true },
+    ];
+  },
   partialPrefetching: true,
   turbopack: {
     rules: {

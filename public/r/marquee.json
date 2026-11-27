@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "marquee",
+  "title": "Marquee",
+  "description": "An infinite, CSS-only scrolling track for logos, testimonials or badges.",
+  "files": [
+    {
+      "path": "src/registry/werkui/marquee.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface MarqueeProps extends React.ComponentProps<\"div\"> {\n  /** Run the animation in the opposite direction. */\n  reverse?: boolean;\n  /** Pause while the pointer is over the marquee. */\n  pauseOnHover?: boolean;\n  /** Scroll vertically instead of horizontally. */\n  vertical?: boolean;\n  /** How many times the content is repeated to fill the track. */\n  repeat?: number;\n}\n\nexport function Marquee({\n  className,\n  reverse = false,\n  pauseOnHover = false,\n  vertical = false,\n  repeat = 4,\n  children,\n  ...props\n}: MarqueeProps) {\n  return (\n    <div\n      {...props}\n      className={cn(\n        \"group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)]\",\n        vertical ? \"flex-col\" : \"flex-row\",\n        className,\n      )}\n    >\n      {Array.from({ length: repeat }).map((_, i) => (\n        <div\n          key={i}\n          aria-hidden={i > 0}\n          className={cn(\n            \"flex shrink-0 justify-around [gap:var(--gap)] motion-reduce:animate-none\",\n            vertical ? \"animate-marquee-vertical flex-col\" : \"animate-marquee flex-row\",\n            pauseOnHover && \"group-hover:[animation-play-state:paused]\",\n            reverse && \"[animation-direction:reverse]\",\n          )}\n        >\n          {children}\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@theme inline": {
+      "--animate-marquee": "marquee var(--duration, 40s) linear infinite",
+      "--animate-marquee-vertical": "marquee-vertical var(--duration, 40s) linear infinite"
+    },
+    "@keyframes marquee": {
+      "from": {
+        "transform": "translateX(0)"
+      },
+      "to": {
+        "transform": "translateX(calc(-100% - var(--gap, 1rem)))"
+      }
+    },
+    "@keyframes marquee-vertical": {
+      "from": {
+        "transform": "translateY(0)"
+      },
+      "to": {
+        "transform": "translateY(calc(-100% - var(--gap, 1rem)))"
+      }
+    }
+  },
+  "type": "registry:ui"
+}

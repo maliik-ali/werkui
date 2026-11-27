@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-text",
+  "title": "Gradient Text",
+  "description": "Inline text with a slowly moving gradient.",
+  "files": [
+    {
+      "path": "src/registry/werkui/gradient-text.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function GradientText({ className, children, ...props }: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      className={cn(\n        \"inline animate-gradient bg-[linear-gradient(90deg,var(--chart-1),var(--chart-4),var(--chart-3),var(--chart-2),var(--chart-1))] bg-[length:300%_100%] bg-clip-text text-transparent motion-reduce:animate-none\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </span>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@theme inline": {
+      "--animate-gradient": "gradient 8s linear infinite"
+    },
+    "@keyframes gradient": {
+      "to": {
+        "background-position": "var(--bg-size, 300%) 0"
+      }
+    }
+  },
+  "type": "registry:ui"
+}

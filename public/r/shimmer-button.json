@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shimmer-button",
+  "title": "Shimmer Button",
+  "description": "A primary call-to-action button with a looping light sweep.",
+  "files": [
+    {
+      "path": "src/registry/werkui/shimmer-button.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ShimmerButtonProps extends React.ComponentProps<\"button\"> {\n  /** Render as a link instead of a button. */\n  href?: string;\n  /** Colour of the light sweep. */\n  shimmerColor?: string;\n  /** Any CSS background for the button face. */\n  background?: string;\n  /** Duration of one sweep, e.g. \"2.5s\". */\n  shimmerDuration?: string;\n}\n\nexport function ShimmerButton({\n  href,\n  shimmerColor = \"#ffffff\",\n  background = \"var(--foreground)\",\n  shimmerDuration = \"2.5s\",\n  className,\n  style,\n  children,\n  ...props\n}: ShimmerButtonProps) {\n  // Renders an <a> when `href` is set. Cast keeps the button prop types.\n  const Comp = (href ? \"a\" : \"button\") as \"button\";\n  return (\n    <Comp\n      {...(href ? { href } : {})}\n      style={\n        {\n          \"--shimmer-color\": shimmerColor,\n          \"--shimmer-bg\": background,\n          \"--shimmer-duration\": shimmerDuration,\n          ...style,\n        } as React.CSSProperties\n      }\n      className={cn(\n        \"relative inline-flex h-11 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-6 text-sm font-medium text-background transition-transform [background:var(--shimmer-bg)] active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n        className,\n      )}\n      {...props}\n    >\n      <span\n        aria-hidden\n        className=\"absolute inset-0 animate-shimmer bg-[linear-gradient(110deg,transparent_35%,var(--shimmer-color)_50%,transparent_65%)] opacity-30 [animation-duration:var(--shimmer-duration)] motion-reduce:hidden\"\n      />\n      <span className=\"relative z-10 inline-flex items-center gap-2\">{children}</span>\n    </Comp>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@theme inline": {
+      "--animate-shimmer": "shimmer 2.5s linear infinite"
+    },
+    "@keyframes shimmer": {
+      "from": {
+        "transform": "translateX(-100%)"
+      },
+      "to": {
+        "transform": "translateX(100%)"
+      }
+    }
+  },
+  "type": "registry:ui"
+}
