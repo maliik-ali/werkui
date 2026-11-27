@@ -7,6 +7,7 @@ import BentoGridDemo from "@/registry/werkui/examples/bento-grid-demo";
 import HeroSectionDemo from "@/registry/werkui/examples/hero-section-demo";
 import NavbarDemo from "@/registry/werkui/examples/navbar-demo";
 import PricingCardsDemo from "@/registry/werkui/examples/pricing-cards-demo";
+import BarChartCardDemo from "@/registry/werkui/examples/bar-chart-card-demo";
 import StatCardDemo from "@/registry/werkui/examples/stat-card-demo";
 import TestimonialsMarqueeDemo from "@/registry/werkui/examples/testimonials-marquee-demo";
 
@@ -32,6 +33,24 @@ export type RegistryComponent = {
 const f = (slug: string) => `src/registry/werkui/${slug}.tsx`;
 
 export const components: RegistryComponent[] = [
+  {
+    slug: "bar-chart-card",
+    title: "Bar Chart Card",
+    description: "A dashboard card with a diverging bar chart, a legend and axis labels. Built with plain CSS, so it needs no chart library.",
+    category: "Dashboard",
+    file: f("bar-chart-card"),
+    Demo: BarChartCardDemo,
+    isNew: true,
+    props: [
+      { name: "title", type: "ReactNode", description: "Card heading." },
+      { name: "action", type: "ReactNode", description: "Slot on the right of the heading, for example a period select." },
+      { name: "data", type: "{ label: string; above: number; below: number }[]", description: "One entry per bar. below is a positive number drawn under the zero line." },
+      { name: "aboveLabel", type: "string", description: "Legend and tooltip name of the series above zero." },
+      { name: "belowLabel", type: "string", description: "Legend and tooltip name of the series below zero." },
+      { name: "step", type: "number", default: "100", description: "Distance between grid lines and Y-axis labels." },
+      { name: "formatTick", type: "(value: number) => string", description: "Format Y-axis labels. Defaults to a signed number." },
+    ],
+  },
   {
     slug: "stat-card",
     title: "Stat Card",

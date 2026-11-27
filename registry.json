@@ -191,6 +191,18 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "bar-chart-card",
+      "type": "registry:ui",
+      "title": "Bar Chart Card",
+      "description": "A dashboard card with a diverging bar chart, a legend and axis labels. No chart library needed.",
+      "files": [
+        {
+          "path": "src/registry/werkui/bar-chart-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
