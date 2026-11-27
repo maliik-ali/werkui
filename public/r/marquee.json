@@ -10,11 +10,13 @@
       "type": "registry:ui"
     }
   ],
+  "cssVars": {
+    "theme": {
+      "animate-marquee": "marquee var(--duration, 40s) linear infinite",
+      "animate-marquee-vertical": "marquee-vertical var(--duration, 40s) linear infinite"
+    }
+  },
   "css": {
-    "@theme inline": {
-      "--animate-marquee": "marquee var(--duration, 40s) linear infinite",
-      "--animate-marquee-vertical": "marquee-vertical var(--duration, 40s) linear infinite"
-    },
     "@keyframes marquee": {
       "from": {
         "transform": "translateX(0)"

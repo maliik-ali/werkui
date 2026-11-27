@@ -14,10 +14,12 @@
           "type": "registry:ui"
         }
       ],
+      "cssVars": {
+        "theme": {
+          "animate-shimmer": "shimmer 2.5s linear infinite"
+        }
+      },
       "css": {
-        "@theme inline": {
-          "--animate-shimmer": "shimmer 2.5s linear infinite"
-        },
         "@keyframes shimmer": {
           "from": {
             "transform": "translateX(-100%)"
@@ -54,10 +56,12 @@
           "type": "registry:ui"
         }
       ],
+      "cssVars": {
+        "theme": {
+          "animate-gradient": "gradient 8s linear infinite"
+        }
+      },
       "css": {
-        "@theme inline": {
-          "--animate-gradient": "gradient 8s linear infinite"
-        },
         "@keyframes gradient": {
           "to": {
             "background-position": "var(--bg-size, 300%) 0"
@@ -76,11 +80,13 @@
           "type": "registry:ui"
         }
       ],
+      "cssVars": {
+        "theme": {
+          "animate-marquee": "marquee var(--duration, 40s) linear infinite",
+          "animate-marquee-vertical": "marquee-vertical var(--duration, 40s) linear infinite"
+        }
+      },
       "css": {
-        "@theme inline": {
-          "--animate-marquee": "marquee var(--duration, 40s) linear infinite",
-          "--animate-marquee-vertical": "marquee-vertical var(--duration, 40s) linear infinite"
-        },
         "@keyframes marquee": {
           "from": {
             "transform": "translateX(0)"

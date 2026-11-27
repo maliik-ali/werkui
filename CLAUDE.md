@@ -17,7 +17,7 @@ WerkUI is a **single, standalone open-source component library** for SaaS and ag
 2. **Follow the existing website design.** Do not redesign the site. Reuse its look: tokens in `src/app/globals.css` (brand blue, orange accent), Geist font, rounded-full pills, bordered `bg-card` cards, dotted preview backdrop, light and dark themes. New pages and chrome should match what is already there.
 3. **Components follow the Magic UI / Kokonut UI pattern:** copy-paste source, animated and polished, installed with `npx shadcn@latest add https://www.werkui.com/r/<slug>.json`.
 4. Recommend, don't survey. Make sensible choices and say what you chose.
-5. Never commit, push, publish, or touch the existing `maliik-ali/werkui` GitHub repo or the live werkui.com marketplace unless explicitly asked.
+5. Never commit, push or deploy unless explicitly asked.
 
 ## Layout
 
@@ -40,7 +40,7 @@ src/components/site/                      site-only chrome (never imported by re
 - **Props:** extend the root element's props, spread the rest, merge `className` with `cn()`. Document every custom prop in `components-registry.ts`.
 - **Accessibility:** semantic elements, visible `focus-visible` styles, respect reduced motion (`motion-reduce:` classes or `useReducedMotion`), no interactive element nested in another (no `<a>` in `<a>`, no `<button>` in `<a>`).
 - **Server components by default.** Add `"use client"` only when needed (hooks, motion).
-- **Animations** are CSS keyframes defined in `globals.css` (`@theme`) and repeated in the item's `css` field in `registry.json` so installs get them.
+- **Animations** are CSS keyframes defined in `globals.css` (`@theme`) and repeated in `registry.json` so installs get them. Put the token under `cssVars.theme` (e.g. `"animate-marquee": "marquee 40s linear infinite"`) and the keyframes under `css` (`"@keyframes marquee": {...}`). Do NOT put `"@theme inline"` inside `css`: the shadcn CLI fails with `update-css: Unknown word ...`.
 
 ## Add a component
 
@@ -48,8 +48,9 @@ src/components/site/                      site-only chrome (never imported by re
 2. Entry in `registry.json` (`dependencies`, `css`, correct `type`: `registry:ui` for primitives, `registry:component` for sections).
 3. Entry in `src/lib/components-registry.ts` (slug, title, description, category, file, Demo, props).
 4. Add `isNew: true` for fresh components (shows a badge in the sidebar and search). The docs page builds the Manual install steps from `registry.json`, so keep `dependencies` and `css` accurate there.
-5. `npm run registry:build`, then `npm run lint`, `npm run typecheck`, `npm run build`. Commit `public/r`.
-6. Look at it in the browser, in light and dark, and at phone width.
+5. Test the install for real, not just the build: in a throwaway shadcn project run `npx shadcn@latest add /path/to/werkui/public/r/<slug>.json`, then check the files, the CSS in `globals.css`, and that `tsc` passes there.
+6. `npm run registry:build`, then `npm run lint`, `npm run typecheck`, `npm run build`. Commit `public/r`.
+7. Look at it in the browser, in light and dark, and at phone width.
 
 CI (`.github/workflows/ci.yml`) runs lint, type check, a registry-up-to-date check and the build. Keep it green.
 
@@ -79,3 +80,9 @@ Next, in order: faq-accordion, logo-cloud, stats-counter, cta-section, footer, f
 ## Website
 
 Modelled on magicui.design: top announcement bar, header with search (⌘K) and GitHub stars, a docs area with a left sidebar, breadcrumb with previous/next, Preview/Code tabs with a replay button, CLI/Manual install tabs, Usage, Props, and an "On this page" list. Old `/components` URLs redirect to `/docs/components`. The landing page must not show invented testimonials, logos or numbers as if they were real.
+
+## Deployment
+
+- Live at https://www.werkui.com (the apex `werkui.com` 308-redirects to `www`, so install URLs and `site.url` use `www`). Hosted on Vercel, deployed from `main` of `github.com/maliik-ali/werkui`.
+- `vercel.json` (`{ "framework": "nextjs" }`) must stay: the Vercel project relies on it, and without it the deploy serves only static files and every page 404s.
+- After a deploy, check `/`, `/docs/components/<slug>`, `/r/<slug>.json`, and run a real `shadcn add https://www.werkui.com/r/<slug>.json` in a throwaway project.
