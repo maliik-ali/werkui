@@ -2,12 +2,29 @@ import Link from "next/link";
 import { ArrowRight, Code2, Copy, Eye, Moon, Palette, Wand2 } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/registry/werkui/bento-grid";
 import { HeroSection } from "@/registry/werkui/hero-section";
+import { BarChartCard } from "@/registry/werkui/bar-chart-card";
+import { ShimmerButton } from "@/registry/werkui/shimmer-button";
+import { StatCard, StatCardGroup } from "@/registry/werkui/stat-card";
 import { Marquee } from "@/registry/werkui/marquee";
-import BentoGridDemo from "@/registry/werkui/examples/bento-grid-demo";
 import { CardPreview } from "@/components/site/card-preview";
 import { InstallCommand } from "@/components/site/install-command";
 import { components } from "@/lib/components-registry";
 import { installCommand } from "@/lib/site";
+
+const revenue = [
+  { label: "Jan", above: 120, below: 71 },
+  { label: "Feb", above: 215, below: 91 },
+  { label: "Mar", above: 300, below: 125 },
+  { label: "Apr", above: 150, below: 61 },
+  { label: "May", above: 95, below: 45 },
+  { label: "Jun", above: 260, below: 98 },
+  { label: "Jul", above: 105, below: 48 },
+  { label: "Aug", above: 130, below: 49 },
+  { label: "Sep", above: 120, below: 48 },
+  { label: "Oct", above: 225, below: 70 },
+  { label: "Nov", above: 290, below: 89 },
+  { label: "Dec", above: 190, below: 51 },
+];
 
 const stack = ["React", "Next.js", "Tailwind CSS", "Motion", "TypeScript", "shadcn CLI", "Vite", "Remix"];
 
@@ -29,11 +46,11 @@ export default function HomePage() {
     <>
       <div className="border-b">
         <HeroSection
-          title="Landing page components that ship faster"
-          description="Copy-paste React components for SaaS and agency websites. Built with Tailwind CSS and Motion. Free and open source."
+          title="Page components you copy into your code"
+          description="Heroes, pricing, testimonials and dashboard cards for SaaS and agency sites. React, Tailwind and the shadcn CLI. Free and MIT licensed."
           actions={
             <>
-              <Link href="/docs/components" className="inline-flex h-11 items-center gap-2 rounded-[10px] bg-foreground px-5 text-sm font-medium text-background transition-[opacity,transform] duration-150 ease-out hover:opacity-90 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">Browse components <ArrowRight className="size-4" /></Link>
+              <ShimmerButton href="/docs/components">Browse components <ArrowRight className="size-4" /></ShimmerButton>
               <Link href="/docs/installation" className="inline-flex h-11 items-center rounded-[10px] border bg-card px-5 text-sm font-medium transition-colors hover:bg-accent">
                 Installation
               </Link>
@@ -41,14 +58,16 @@ export default function HomePage() {
           }
           media={
             <div className="mx-auto max-w-4xl text-left">
-              <div className="mx-auto max-w-2xl"><InstallCommand command={installCommand("hero-section")} /></div>
+              <div className="mx-auto max-w-2xl"><InstallCommand command={installCommand("stat-card")} /></div>
               <div className="mt-10 overflow-hidden rounded-xl border bg-card shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
-                <div className="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-3" aria-hidden>
-                  <span className="size-2.5 rounded-full bg-muted-foreground/30" />
-                  <span className="size-2.5 rounded-full bg-muted-foreground/30" />
-                  <span className="size-2.5 rounded-full bg-muted-foreground/30" />
+                <div className="flex flex-col gap-4 bg-muted/40 p-4 sm:p-6">
+                  <StatCardGroup>
+                    <StatCard label="Customers" value="320" caption="Last 90 days" progress={75} />
+                    <StatCard label="Orders" value="500" caption="Last 90 days" progress={65} />
+                    <StatCard label="Cancel" value="20" caption="Last 90 days" progress={35} className="hidden sm:flex" />
+                  </StatCardGroup>
+                  <BarChartCard title="Revenue report" aboveLabel="Expenses" belowLabel="Earning" data={revenue} />
                 </div>
-                <div className="p-4 sm:p-6"><BentoGridDemo /></div>
               </div>
             </div>
           }
@@ -60,7 +79,7 @@ export default function HomePage() {
         <div className="relative">
           <Marquee pauseOnHover className="[--duration:30s]">
             {stack.map((name) => (
-              <span key={name} className="rounded-lg border bg-card px-4 py-2 text-sm text-muted-foreground">{name}</span>
+              <span key={name} className="px-4 py-2 font-mono text-sm text-muted-foreground">{name}</span>
             ))}
           </Marquee>
           <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-background" />
@@ -134,7 +153,7 @@ export default function HomePage() {
         <h2 className="text-balance text-3xl font-medium tracking-tight sm:text-5xl">Build your next landing page in an afternoon</h2>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground">Start with one component and keep going. It is free.</p>
         <div className="mt-8 flex justify-center">
-          <Link href="/docs/components" className="inline-flex h-11 items-center gap-2 rounded-[10px] bg-foreground px-5 text-sm font-medium text-background transition-[opacity,transform] duration-150 ease-out hover:opacity-90 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">Browse components <ArrowRight className="size-4" /></Link>
+          <ShimmerButton href="/docs/components">Browse components <ArrowRight className="size-4" /></ShimmerButton>
         </div>
       </section>
     </>

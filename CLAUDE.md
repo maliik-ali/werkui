@@ -18,6 +18,7 @@ WerkUI is a **single, standalone open-source component library** for SaaS and ag
 3. **Components follow the Magic UI / Kokonut UI pattern:** copy-paste source, animated and polished, installed with `npx shadcn@latest add https://www.werkui.com/r/<slug>.json`.
 4. Recommend, don't survey. Make sensible choices and say what you chose.
 5. Never commit, push or deploy unless explicitly asked.
+6. **The website is built from WerkUI components only** (dogfooding). Do not write custom UI for the site. When a page needs something and no suitable library component exists, STOP and tell the owner what is missing. The owner then gives a Figma design direction, you build it as a new library component first (registry, docs, install test), and only then use it on the site. Site-only chrome that exists today (header, footer, search, install box, docs nav) is legacy; do not add more of it.
 
 ## Layout
 
