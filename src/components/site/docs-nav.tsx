@@ -15,7 +15,7 @@ export function DocsNav({ sections }: { sections: DocsNavSection[] }) {
     <nav aria-label="Documentation" className="flex flex-col gap-6 text-sm">
       {sections.map((section) => (
         <div key={section.title}>
-          <p className="mb-2 px-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">{section.title}</p>
+          <p className="mb-2 px-2 text-xs font-medium text-muted-foreground">{section.title}</p>
           <ul className="flex flex-col gap-0.5">
             {section.items.map((item) => {
               const active = pathname === item.href;
@@ -31,7 +31,7 @@ export function DocsNav({ sections }: { sections: DocsNavSection[] }) {
                   >
                     {item.title}
                     {item.isNew && (
-                      <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">New</span>
+                      <span className="text-[11px] font-medium text-primary">New</span>
                     )}
                   </Link>
                 </li>

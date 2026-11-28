@@ -37,11 +37,11 @@ export function SearchDialog({ items }: { items: SearchItem[] }) {
       <button
         type="button"
         onClick={() => dialogRef.current?.showModal()}
-        className="flex h-9 items-center gap-2 rounded-full border bg-card px-3 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-56"
+        className="flex h-9 items-center gap-2 rounded-[10px] border bg-card px-3 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-56"
       >
         <Search className="size-4" aria-hidden />
-        <span className="hidden flex-1 text-left sm:block">Search docs...</span>
-        <kbd className="hidden rounded border px-1.5 text-[10px] sm:block">⌘K</kbd>
+        <span className="hidden flex-1 text-left sm:block">Search</span>
+        <kbd className="hidden rounded-[4px] border px-1.5 text-[11px] sm:block">⌘K</kbd>
         <span className="sr-only sm:hidden">Search docs</span>
       </button>
       <dialog

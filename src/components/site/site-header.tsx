@@ -35,8 +35,8 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-4 px-4 sm:gap-6 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid size-7 place-items-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">W</span>
+        <Link href="/" className="flex items-center gap-2 font-medium tracking-tight">
+          <span className="grid size-7 place-items-center rounded-md bg-primary text-sm font-medium text-primary-foreground">W</span>
           WerkUI
         </Link>
         <nav className="flex items-center gap-4 text-sm text-muted-foreground sm:gap-5">
@@ -47,7 +47,7 @@ export async function SiteHeader() {
           ))}
           <span className="hidden items-center gap-1.5 sm:flex" title="Coming soon">
             Templates
-            <span className="rounded-full bg-accent px-1.5 py-0.5 text-[10px] font-medium text-accent-foreground">Soon</span>
+            <span className="text-xs text-muted-foreground/70">Soon</span>
           </span>
         </nav>
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
@@ -57,7 +57,7 @@ export async function SiteHeader() {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub repository"
-            className="flex h-9 items-center gap-1.5 rounded-full border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-3"
+            className="flex h-9 items-center gap-1.5 rounded-[10px] border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-3"
           >
             <Star className="size-3.5" />
             <span className="hidden sm:inline">{stars === null ? "GitHub" : stars.toLocaleString()}</span>

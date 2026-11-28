@@ -87,14 +87,14 @@ async function ComponentDetail({ params }: Params) {
           </div>
         </div>
 
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight">{c.title}</h1>
+        <h1 className="mt-4 text-4xl font-medium tracking-tight">{c.title}</h1>
         <p className="mt-3 text-lg text-muted-foreground">{c.description}</p>
 
         <div className="mt-8">
           <ComponentViewer preview={<c.Demo />} codeHtml={codeHtml} source={source} />
         </div>
 
-        <h2 id="installation" className="mt-14 scroll-mt-20 text-2xl font-semibold tracking-tight">Installation</h2>
+        <h2 id="installation" className="mt-14 scroll-mt-20 text-2xl font-medium tracking-tight">Installation</h2>
         <div className="mt-4">
           <InstallTabs
             cli={<InstallCommand command={installCommand(c.slug)} />}
@@ -138,10 +138,10 @@ async function ComponentDetail({ params }: Params) {
           />
         </div>
 
-        <h2 id="usage" className="mt-14 scroll-mt-20 text-2xl font-semibold tracking-tight">Usage</h2>
+        <h2 id="usage" className="mt-14 scroll-mt-20 text-2xl font-medium tracking-tight">Usage</h2>
         <div className="mt-4"><CodeBlock code={demoSource} /></div>
 
-        <h2 id="props" className="mt-14 scroll-mt-20 text-2xl font-semibold tracking-tight">Props</h2>
+        <h2 id="props" className="mt-14 scroll-mt-20 text-2xl font-medium tracking-tight">Props</h2>
         <div className="mt-4 overflow-x-auto rounded-xl border">
           <table className="w-full text-left text-sm">
             <thead className="bg-muted/50 text-muted-foreground">

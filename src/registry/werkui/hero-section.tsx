@@ -39,7 +39,7 @@ export function HeroSection({
       {announcement && <motion.div {...item(0)}>{announcement}</motion.div>}
       <motion.h1
         {...item(0.08)}
-        className="mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-6xl"
+        className="mt-6 text-balance text-4xl font-medium tracking-tight sm:text-6xl"
       >
         {title}
       </motion.h1>

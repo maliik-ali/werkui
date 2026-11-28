@@ -19,12 +19,12 @@ export default function DocsIntroPage() {
   return (
     <div className="max-w-3xl py-10">
       <p className="text-sm text-muted-foreground">Docs / Getting Started</p>
-      <h1 className="mt-2 text-4xl font-semibold tracking-tight">Introduction</h1>
+      <h1 className="mt-2 text-4xl font-medium tracking-tight">Introduction</h1>
       <p className="mt-3 text-lg text-muted-foreground">
         WerkUI is a collection of animated React components for SaaS and agency landing pages. Built with Tailwind CSS and Motion, free and open source.
       </p>
 
-      <h2 className="mt-12 text-2xl font-semibold tracking-tight">How it works</h2>
+      <h2 className="mt-12 text-2xl font-medium tracking-tight">How it works</h2>
       <p className="mt-3 text-muted-foreground">
         Pick a component, run one command, and the source lands in your <code className="rounded bg-muted px-1.5 py-0.5 text-xs">components</code> folder. It is your code from that moment: change the markup, the colours and the motion however you like.
       </p>
@@ -39,10 +39,10 @@ export default function DocsIntroPage() {
       </ul>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/docs/installation" className="inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+        <Link href="/docs/installation" className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
           Installation <ArrowRight className="size-4" />
         </Link>
-        <Link href="/docs/components" className="inline-flex h-10 items-center rounded-full border px-5 text-sm font-medium transition-colors hover:bg-accent">
+        <Link href="/docs/components" className="inline-flex h-10 items-center rounded-[10px] border px-5 text-sm font-medium transition-colors hover:bg-accent">
           Browse {components.length} components
         </Link>
       </div>
